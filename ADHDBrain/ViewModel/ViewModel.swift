@@ -15,26 +15,34 @@ class ViewModel: ObservableObject {
         }.count
     }
     
-    public func sortTask(for taskSwipe: TaskSwipe?) {
+    public func sortTask(for taskSwipe: TaskDrop?) {
         guard let taskSwipe = taskSwipe else {
             return
         }
         var task = taskSwipe.task
-        let swipeDirection = taskSwipe.swipeDiretion
-        switch swipeDirection {
-        case .right:
+        let dropAction = taskSwipe.dropAction
+        switch dropAction {
+            
+        case .morning:
             tasks.removeAll {
                 task == $0
             }
-            task.sortStatus = .sorted(.notDetermined)
+            task.sortStatus = .sorted(.morning)
             tasks.append(task)
-        case .left:
+        case .afternoon:
             tasks.removeAll {
                 task == $0
             }
-            task.sortStatus = .skipped
+            task.sortStatus = .sorted(.afternoon)
             tasks.append(task)
-        case .notSwiped:
+        case .evening:
+            tasks.removeAll {
+                task == $0
+            }
+            task.sortStatus = .sorted(.evening)
+            tasks.append(task)
+        case .noDrop:
+            print("no drop")
             return
         }
     }

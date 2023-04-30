@@ -12,6 +12,11 @@ struct ContentView: View {
     var body: some View {
         if vm.unsortedTasks > 0 {
             SortView(vm: vm)
+                .onPreferenceChange(DragPreference.self) { value in
+                    guard let value = value else { return }
+//                    isDragging = value
+                    print(value)
+                }
         } else {
             AssignTimeView(vm: vm)
         }

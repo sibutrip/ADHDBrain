@@ -10,7 +10,9 @@
 		742A7C7329FEC08E0050C026 /* SwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7229FEC08E0050C026 /* SwipeGesture.swift */; };
 		742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7429FEC5A10050C026 /* ContentView.swift */; };
 		742A7C7729FEC6D10050C026 /* AssignTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7629FEC6D10050C026 /* AssignTimeView.swift */; };
-		742A7C7B29FECDE90050C026 /* SwipePreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7A29FECDE90050C026 /* SwipePreference.swift */; };
+		742A7C7B29FECDE90050C026 /* DropPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7A29FECDE90050C026 /* DropPreference.swift */; };
+		742A7C7E29FEDDA00050C026 /* DayOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7D29FEDDA00050C026 /* DayOverlay.swift */; };
+		742A7C8029FEE9260050C026 /* DragPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7F29FEE9260050C026 /* DragPreference.swift */; };
 		748DAE4029FD930D003A3B06 /* ADHDBrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE3F29FD930D003A3B06 /* ADHDBrainApp.swift */; };
 		748DAE4229FD930D003A3B06 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4129FD930D003A3B06 /* SortView.swift */; };
 		748DAE4429FD930E003A3B06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748DAE4329FD930E003A3B06 /* Assets.xcassets */; };
@@ -24,7 +26,9 @@
 		742A7C7229FEC08E0050C026 /* SwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGesture.swift; sourceTree = "<group>"; };
 		742A7C7429FEC5A10050C026 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		742A7C7629FEC6D10050C026 /* AssignTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignTimeView.swift; sourceTree = "<group>"; };
-		742A7C7A29FECDE90050C026 /* SwipePreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipePreference.swift; sourceTree = "<group>"; };
+		742A7C7A29FECDE90050C026 /* DropPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPreference.swift; sourceTree = "<group>"; };
+		742A7C7D29FEDDA00050C026 /* DayOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOverlay.swift; sourceTree = "<group>"; };
+		742A7C7F29FEE9260050C026 /* DragPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragPreference.swift; sourceTree = "<group>"; };
 		748DAE3C29FD930D003A3B06 /* ADHDBrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ADHDBrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		748DAE3F29FD930D003A3B06 /* ADHDBrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHDBrainApp.swift; sourceTree = "<group>"; };
 		748DAE4129FD930D003A3B06 /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
@@ -50,7 +54,8 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7229FEC08E0050C026 /* SwipeGesture.swift */,
-				742A7C7A29FECDE90050C026 /* SwipePreference.swift */,
+				742A7C7A29FECDE90050C026 /* DropPreference.swift */,
+				742A7C7F29FEE9260050C026 /* DragPreference.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 				748DAE4129FD930D003A3B06 /* SortView.swift */,
 				742A7C7629FEC6D10050C026 /* AssignTimeView.swift */,
 				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
+				742A7C7D29FEDDA00050C026 /* DayOverlay.swift */,
 				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
 			);
 			path = View;
@@ -191,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				748DAE5529FD943C003A3B06 /* ViewModel.swift in Sources */,
+				742A7C8029FEE9260050C026 /* DragPreference.swift in Sources */,
 				748DAE4229FD930D003A3B06 /* SortView.swift in Sources */,
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
 				748DAE4E29FD9371003A3B06 /* Task.swift in Sources */,
@@ -198,7 +205,8 @@
 				748DAE5029FD9383003A3B06 /* TaskRow.swift in Sources */,
 				742A7C7729FEC6D10050C026 /* AssignTimeView.swift in Sources */,
 				742A7C7329FEC08E0050C026 /* SwipeGesture.swift in Sources */,
-				742A7C7B29FECDE90050C026 /* SwipePreference.swift in Sources */,
+				742A7C7B29FECDE90050C026 /* DropPreference.swift in Sources */,
+				742A7C7E29FEDDA00050C026 /* DayOverlay.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
