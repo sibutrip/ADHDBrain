@@ -31,7 +31,6 @@ struct DayOverlay: View {
     }
     
     var timeSelection: TimeSelection {
-        print(dragAction.timeSelection)
         return dragAction.timeSelection
     }
     
