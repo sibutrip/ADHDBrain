@@ -14,10 +14,11 @@ struct SwipeGesture: ViewModifier {
     
     @State private var offset: CGSize = .zero
     @State private var dropPreference: DropPreference? // doess this need to be optional?
-    @State private var dropAction: DropAction = .noDrop
+    @State private var dropState: TimeSelection = .noneSelected
     
     @State private var dragPreference = DragPreference()
-    @State private var dragState: Bool = false
+    @State private var dragState: TimeSelection = .noneSelected
+    @State private var isDragging: Bool = false
     
     func body(content: Content) -> some View {
         content
@@ -25,32 +26,48 @@ struct SwipeGesture: ViewModifier {
             .gesture(
                 DragGesture()
                     .onChanged { value in
+                        isDragging = true
                         offset = value.translation
-                        dragState = true
+                        print(geo.size.height)
+                        print(geo.size.width)
+                        let locationHeight = value.location.y
+                        let locationWidth = value.location.x
+                        if (locationWidth) < (geo.size.width - geo.size.height / 3 + geo.size.height / 5) {
+                            dragState = .noneSelected
+                            return
+                        }
+                        if (locationHeight + geo.size.height / 2) < geo.size.height / 3  {
+                            dragState = .morning
+                        } else if (locationHeight + geo.size.height / 2) < 2 * geo.size.height / 3{
+                            dragState = .afternoon
+                        } else {
+                            dragState = .evening
+                        }
                     }
                     .onEnded { value in
-                        dragState = false
+                        dragState = .noneSelected
+                        isDragging = false
                         let locationHeight = value.predictedEndLocation.y
                         let locationWidth = value.predictedEndLocation.x
                         if (locationWidth) < (geo.size.width - geo.size.height / 3 + geo.size.height / 5) {
                             offset = .zero
-                            dropAction = .noDrop
+                            dropState = .noneSelected
                             return
                         }
                         if (locationHeight + geo.size.height / 2) < geo.size.height / 3 {
-                            dropAction = .morning
+                            dropState = .morning
                             print("morning")
                         } else if (locationHeight + geo.size.height / 2) < 2 * geo.size.height / 3 {
-                            dropAction = .afternoon
+                            dropState = .afternoon
                             print("afternoon")
                         } else {
-                            dropAction = .evening
+                            dropState = .evening
                             print("eve")
                         }
                     }
             )
-            .preference(key: DropPreference.self, value: TaskDrop(task: task, dropAction: dropAction))
-            .preference(key: DragPreference.self, value: dragState)
+            .preference(key: DropPreference.self, value: DropTask(task: task, dropAction: dropState))
+            .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState))
     }
     
     init(_ geo: GeometryProxy, with task: Task) {

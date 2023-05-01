@@ -9,18 +9,18 @@ import Foundation
 import SwiftUI
 
 struct DropPreference: PreferenceKey {
-    static var defaultValue: TaskDrop?
+    static var defaultValue: DropTask?
 
-    static func reduce(value: inout TaskDrop?, nextValue: () -> TaskDrop?) {
+    static func reduce(value: inout DropTask?, nextValue: () -> DropTask?) {
         value = nextValue()
     }
 }
 
-struct TaskDrop: Equatable {
+struct DropTask: Equatable {
     let task: Task
-    let dropAction: DropAction
+    let dropAction: TimeSelection
 }
 
-enum DropAction: Equatable {
-    case morning, afternoon, evening, noDrop
+enum TimeSelection: Equatable {
+    case morning, afternoon, evening, skip, noneSelected
 }

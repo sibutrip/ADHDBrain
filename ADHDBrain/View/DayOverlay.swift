@@ -11,42 +11,85 @@ struct Day: Identifiable {
     let id = UUID()
     let name: String
     let image: String
-    static let days: [Day] = [.init(name: "􀆱", image: "sunrise"),
-                              .init(name: "􀆳", image: "sunset"),
-                              .init(name: "􀆹", image: "moon")]
+    let timeSelection: TimeSelection
+    static let days: [Day] = [.init(name: "􀆱", image: "sunrise", timeSelection: .morning),
+                              .init(name: "􀆳", image: "sunset", timeSelection: .afternoon),
+                              .init(name: "􀆹", image: "moon", timeSelection: .evening)]
+    static let skipDay = Day(name: "skip", image: "x.circle", timeSelection: .skip)
 }
 
 struct DayOverlay: View {
     let days = Day.days
     let geo: GeometryProxy
+    let skipDay = Day.skipDay
     
     @State private var dragPreference = DragPreference()
-    @Binding var isDragging: Bool
+    @Binding var dragAction: DragTask
+    
+    var isDragging: Bool {
+        dragAction.isDragging
+    }
+    
+    var timeSelection: TimeSelection {
+        print(dragAction.timeSelection)
+        return dragAction.timeSelection
+    }
     
     var body: some View {
-        VStack(spacing: 0) {
-            ForEach(days) { day in
+        ZStack {
+            VStack(spacing: 0) {
+                ForEach(days) { day in
+                    Circle()
+                        .foregroundColor(.blue)
+                        .opacity(isDragging ? 0.2 : 0.0)
+                        .frame(width: geo.size.width, alignment: .trailing)
+                        .offset(x: geo.size.height / 5)
+                        .overlay {
+                            HStack {
+                                Spacer()
+                                Image(systemName: day.image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: geo.size.width / 8, alignment: .trailing)
+                            }
+                            .padding(.trailing, 20)
+                        }
+                        .opacity(isDragging ? 1.0 : 0.0)
+                        .offset(x: timeSelection == day.timeSelection ? geo.size.width / -10: 0)
+                        .animation(.easeOut, value: timeSelection)
+                }
+            }
+            .offset(x: isDragging ? 0 : geo.size.width * 0.1)
+            
+            VStack(spacing: 0) {
+                Spacer()
+                    .frame(height: geo.size.height / 3)
                 Circle()
-                    .foregroundColor(.blue)
+                    .foregroundColor(.red)
                     .opacity(isDragging ? 0.2 : 0.0)
-                    .frame(width: geo.size.width, alignment: .trailing)
-                    .offset(x: geo.size.height / 5)
+                    .frame(width: geo.size.width, alignment: .leading)
+                    .offset(x: -geo.size.height / 5)
                     .overlay {
                         HStack {
-                            Spacer()
-                            Image(systemName: day.image)
+                            Image(systemName: skipDay.image)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: geo.size.width / 8, alignment: .trailing)
+                                .frame(width: geo.size.width / 8, alignment: .leading)
+                            Spacer()
                         }
-                        .padding(.trailing, 20)
+                        .padding(.leading, 20)
                     }
                     .opacity(isDragging ? 1.0 : 0.0)
+                    .offset(x: timeSelection == skipDay.timeSelection ? geo.size.width / -10: 0)
+                    .animation(.easeOut, value: timeSelection)
+                Spacer()
+                    .frame(height: geo.size.height / 3)
             }
+            .offset(x: isDragging ? 0 : geo.size.width * -0.1)
+
         }
         
         .frame(width: geo.size.width, height: geo.size.height)
-        .offset(x: isDragging ? 0 : geo.size.width * 0.1)
         .animation(.easeOut, value: isDragging)
     }
 }

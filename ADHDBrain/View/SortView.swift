@@ -15,8 +15,8 @@ struct SortView: View {
     @State private var newTask = ""
     @ObservedObject var vm: ViewModel
     @FocusState private var focusedField: FocusedField?
-    @State var dropAction: DropAction = .noDrop
-    @State private var isDragging = false
+    @State var dropAction: TimeSelection = .noneSelected
+    @State private var dragAction: DragTask = .init(isDragging: false, timeSelection: .noneSelected)
     
     var body: some View {
         GeometryReader { geo in
@@ -26,12 +26,12 @@ struct SortView: View {
                         if task.sortStatus == .unsorted {
                             TaskRow(task, geo)
                                 .onPreferenceChange(DropPreference.self) {
-                                    taskDrop in
-                                    vm.sortTask(for: taskDrop)
+                                    dropTask in
+                                    vm.sortTask(for: dropTask)
                                 }
-                                .onPreferenceChange(DragPreference.self) { isDragging in
-                                    if let isDragging = isDragging {
-                                        self.isDragging = isDragging
+                                .onPreferenceChange(DragPreference.self) { dragAction in
+                                    if let dragAction = dragAction {
+                                        self.dragAction = dragAction
                                     }
                                 }
                         }
@@ -55,8 +55,7 @@ struct SortView: View {
                 .onAppear {
                     focusedField = .none
                 }
-                DayOverlay(geo: geo, isDragging: $isDragging)
-            .padding()
+                DayOverlay(geo: geo, dragAction: $dragAction)
             }
         }
     }
