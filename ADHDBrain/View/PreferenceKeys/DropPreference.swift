@@ -18,7 +18,7 @@ struct DropPreference: PreferenceKey {
 
 struct DropTask: Equatable {
     let task: Task
-    let dropAction: TimeSelection
+    let timeSelection: TimeSelection
 }
 
 enum TimeSelection: Equatable {

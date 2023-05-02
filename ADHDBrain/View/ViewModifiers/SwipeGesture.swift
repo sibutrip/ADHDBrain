@@ -70,7 +70,7 @@ struct SwipeGesture: ViewModifier {
                         offset = .zero
                     }
             )
-            .preference(key: DropPreference.self, value: DropTask(task: task, dropAction: dropState))
+            .preference(key: DropPreference.self, value: DropTask(task: task, timeSelection: dropState))
             .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState))
     }
     

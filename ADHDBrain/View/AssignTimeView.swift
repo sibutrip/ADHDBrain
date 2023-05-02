@@ -17,5 +17,8 @@ struct AssignTimeView: View {
 struct AssignTimeView_Previews: PreviewProvider {
     static var previews: some View {
         AssignTimeView(vm: ViewModel())
+        AssignTimeView(vm: ViewModel())
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
+        
     }
 }

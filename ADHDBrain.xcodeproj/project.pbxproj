@@ -54,8 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7229FEC08E0050C026 /* SwipeGesture.swift */,
-				742A7C7A29FECDE90050C026 /* DropPreference.swift */,
-				742A7C7F29FEE9260050C026 /* DragPreference.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -106,6 +104,7 @@
 				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
 				742A7C7D29FEDDA00050C026 /* DayOverlay.swift */,
 				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
+				74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -124,6 +123,15 @@
 				748DAE4D29FD9371003A3B06 /* Task.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */ = {
+			isa = PBXGroup;
+			children = (
+				742A7C7A29FECDE90050C026 /* DropPreference.swift */,
+				742A7C7F29FEE9260050C026 /* DragPreference.swift */,
+			);
+			path = PreferenceKeys;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

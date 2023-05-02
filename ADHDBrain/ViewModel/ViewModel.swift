@@ -20,26 +20,26 @@ class ViewModel: ObservableObject {
             return
         }
         var task = dropTask.task
-        let dropAction = dropTask.dropAction
+        let dropAction = dropTask.timeSelection
         switch dropAction {
             
         case .morning:
             tasks.removeAll {
                 task == $0
             }
-            task.sortStatus = .sorted(.morning)
+            task.sortStatus = .sorted(.Morning)
             tasks.append(task)
         case .afternoon:
             tasks.removeAll {
                 task == $0
             }
-            task.sortStatus = .sorted(.afternoon)
+            task.sortStatus = .sorted(.Afternoon)
             tasks.append(task)
         case .evening:
             tasks.removeAll {
                 task == $0
             }
-            task.sortStatus = .sorted(.evening)
+            task.sortStatus = .sorted(.Evening)
             tasks.append(task)
         case .noneSelected:
             return
@@ -54,7 +54,7 @@ class ViewModel: ObservableObject {
     
     init() {
         tasks = [
-            .init(name: "clean bathroom"),
+            .init(name: "grocery shopping"),
             .init(name: "do performance review")
         ]
     }
