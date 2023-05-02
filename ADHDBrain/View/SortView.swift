@@ -57,6 +57,7 @@ struct SortView: View {
                 }
                 DayOverlay(geo: geo, dragAction: $dragAction)
             }
+            .coordinateSpace(name: "SortView")
         }
     }
     

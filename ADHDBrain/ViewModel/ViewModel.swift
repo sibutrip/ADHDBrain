@@ -42,7 +42,6 @@ class ViewModel: ObservableObject {
             task.sortStatus = .sorted(.evening)
             tasks.append(task)
         case .noneSelected:
-            print("no drop")
             return
         case .skip1:
             return

@@ -9,9 +9,10 @@ import Foundation
 import SwiftUI
 
 struct SwipeGesture: ViewModifier {
-    let geo: GeometryProxy
     let task: Task
     
+    let geo: GeometryProxy
+
     @State private var offset: CGSize = .zero
     @State private var dropPreference: DropPreference? // doess this need to be optional?
     @State private var dropState: TimeSelection = .noneSelected
@@ -33,11 +34,11 @@ struct SwipeGesture: ViewModifier {
         content
             .offset(offset)
             .gesture(
-                DragGesture()
+                DragGesture(coordinateSpace: .named("SortView"))
                     .onChanged { value in
                         isDragging = true
                         offset = value.translation
-                        locationHeight = value.location.y + geo.size.height / 2
+                        locationHeight = value.location.y
                         locationWidth = value.location.x
                         if locationWidth <  leading {
                             // leading edge of screen
@@ -64,7 +65,6 @@ struct SwipeGesture: ViewModifier {
                     }
                     .onEnded { value in
                         dropState = dragState
-                        print(dropState)
                         dragState = .noneSelected
                         isDragging = false
                         offset = .zero
@@ -75,8 +75,8 @@ struct SwipeGesture: ViewModifier {
     }
     
     init(_ geo: GeometryProxy, with task: Task) {
-        self.geo = geo
         self.task = task
+        self.geo = geo
         top = geo.size.height / 3
         center = 2 * geo.size.height / 3
         bottom = geo.size.height
