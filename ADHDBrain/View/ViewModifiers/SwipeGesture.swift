@@ -20,6 +20,15 @@ struct SwipeGesture: ViewModifier {
     @State private var dragState: TimeSelection = .noneSelected
     @State private var isDragging: Bool = false
     
+    @State var locationWidth: CGFloat = .zero
+    @State var locationHeight: CGFloat = .zero
+    
+    let top: CGFloat
+    let center: CGFloat
+    let bottom: CGFloat
+    let leading: CGFloat
+    let trailing: CGFloat
+    
     func body(content: Content) -> some View {
         content
             .offset(offset)
@@ -28,45 +37,37 @@ struct SwipeGesture: ViewModifier {
                     .onChanged { value in
                         isDragging = true
                         offset = value.translation
-//                        print(geo.size.height)
-//                        print(geo.size.width)
-                        let locationHeight = value.location.y
-                        let locationWidth = value.location.x
-                        if (locationWidth) < (geo.size.width - geo.size.height / 3 + geo.size.height / 5) {
+                        locationHeight = value.location.y + geo.size.height / 2
+                        locationWidth = value.location.x
+                        if locationWidth <  leading {
+                            // leading edge of screen
+                            if locationHeight < top {
+                                dragState = .skip1
+                            } else if locationHeight < center {
+                                dragState = .skip3
+                            } else {
+                                dragState = .skip7
+                            }
+                        } else if locationWidth < trailing {
+                            // middle of screen
                             dragState = .noneSelected
-                            return
-                        }
-                        if (locationHeight + geo.size.height / 2) < geo.size.height / 3  {
-                            dragState = .morning
-                        } else if (locationHeight + geo.size.height / 2) < 2 * geo.size.height / 3{
-                            dragState = .afternoon
                         } else {
-                            dragState = .evening
+                            // trailing edge of screen
+                            if locationHeight < top {
+                                dragState = .morning
+                            } else if locationHeight < center {
+                                dragState = .afternoon
+                            } else {
+                                dragState = .evening
+                            }
                         }
                     }
                     .onEnded { value in
+                        dropState = dragState
+                        print(dropState)
                         dragState = .noneSelected
                         isDragging = false
-                        let locationHeight = value.location.y
-                        let locationWidth = value.location.x
-                        
-                        if locationWidth < (geo.size.height / 3 + geo.size.height / 5) && (locationHeight + geo.size.height / 2) < 2 * geo.size.height / 3 && (locationHeight + geo.size.height / 2) > geo.size.height / 3 {
-                            dropState = .skip
-                            print("skip")
-                        } else if (locationWidth) < (geo.size.width - geo.size.height / 3 + geo.size.height / 5) {
-                            offset = .zero
-                            dropState = .noneSelected
-                            return
-                        } else if (locationHeight + geo.size.height / 2) < geo.size.height / 3 {
-                            dropState = .morning
-                            print("morning")
-                        } else if (locationHeight + geo.size.height / 2) < 2 * geo.size.height / 3 {
-                            dropState = .afternoon
-                            print("afternoon")
-                        } else {
-                            dropState = .evening
-                            print("eve")
-                        }
+                        offset = .zero
                     }
             )
             .preference(key: DropPreference.self, value: DropTask(task: task, dropAction: dropState))
@@ -76,5 +77,10 @@ struct SwipeGesture: ViewModifier {
     init(_ geo: GeometryProxy, with task: Task) {
         self.geo = geo
         self.task = task
+        top = geo.size.height / 3
+        center = 2 * geo.size.height / 3
+        bottom = geo.size.height
+        leading = geo.size.height / 3 - geo.size.height / 4
+        trailing = geo.size.width - geo.size.height / 3 + geo.size.height / 4
     }
 }

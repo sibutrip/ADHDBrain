@@ -44,12 +44,12 @@ class ViewModel: ObservableObject {
         case .noneSelected:
             print("no drop")
             return
-        case .skip:
-            tasks.removeAll {
-                task == $0
-            }
-            task.sortStatus = .skipped
-            tasks.append(task)
+        case .skip1:
+            return
+        case .skip3:
+            return
+        case .skip7:
+            return
         }
     }
     

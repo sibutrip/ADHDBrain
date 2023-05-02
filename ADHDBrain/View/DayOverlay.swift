@@ -15,7 +15,7 @@ struct Day: Identifiable {
     static let days: [Day] = [.init(name: "􀆱", image: "sunrise", timeSelection: .morning),
                               .init(name: "􀆳", image: "sunset", timeSelection: .afternoon),
                               .init(name: "􀆹", image: "moon", timeSelection: .evening)]
-    static let skipDay = Day(name: "skip", image: "x.circle", timeSelection: .skip)
+    static let skipDay = Day(name: "skip", image: "x.circle", timeSelection: .noneSelected)
 }
 
 struct DayOverlay: View {
@@ -42,19 +42,19 @@ struct DayOverlay: View {
                         .foregroundColor(.blue)
                         .opacity(isDragging ? 0.2 : 0.0)
                         .frame(width: geo.size.width, alignment: .trailing)
-                        .offset(x: geo.size.height / 5)
+                        .offset(x: geo.size.height / 4)
                         .overlay {
                             HStack {
                                 Spacer()
                                 Image(systemName: day.image)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: geo.size.width / 8, alignment: .trailing)
+                                    .frame(width: geo.size.width / 10, alignment: .trailing)
                             }
-                            .padding(.trailing, 20)
+                            .padding(.trailing, 10)
                         }
                         .opacity(isDragging ? 1.0 : 0.0)
-                        .offset(x: timeSelection == day.timeSelection ? geo.size.width / -10: 0)
+                        .offset(x: timeSelection == day.timeSelection ? geo.size.width / -20: 0)
                         .animation(.easeOut, value: timeSelection)
                 }
             }
@@ -67,19 +67,19 @@ struct DayOverlay: View {
                     .foregroundColor(.red)
                     .opacity(isDragging ? 0.2 : 0.0)
                     .frame(width: geo.size.width, alignment: .leading)
-                    .offset(x: -geo.size.height / 5)
+                    .offset(x: -geo.size.height / 4)
                     .overlay {
                         HStack {
                             Image(systemName: skipDay.image)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: geo.size.width / 8, alignment: .leading)
+                                .frame(width: geo.size.width / 10, alignment: .leading)
                             Spacer()
                         }
-                        .padding(.leading, 20)
+                        .padding(.leading, 10)
                     }
                     .opacity(isDragging ? 1.0 : 0.0)
-                    .offset(x: timeSelection == skipDay.timeSelection ? geo.size.width / -10: 0)
+                    .offset(x: timeSelection == skipDay.timeSelection ? geo.size.width / -20: 0)
                     .animation(.easeOut, value: timeSelection)
                 Spacer()
                     .frame(height: geo.size.height / 3)
