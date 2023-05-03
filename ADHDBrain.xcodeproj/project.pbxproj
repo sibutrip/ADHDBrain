@@ -20,6 +20,7 @@
 		748DAE4E29FD9371003A3B06 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4D29FD9371003A3B06 /* Task.swift */; };
 		748DAE5029FD9383003A3B06 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4F29FD9383003A3B06 /* TaskRow.swift */; };
 		748DAE5529FD943C003A3B06 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE5429FD943C003A3B06 /* ViewModel.swift */; };
+		74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D172A01FE25003953B1 /* TimeSelection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		748DAE4D29FD9371003A3B06 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		748DAE4F29FD9383003A3B06 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		748DAE5429FD943C003A3B06 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		74B12D172A01FE25003953B1 /* TimeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				748DAE4D29FD9371003A3B06 /* Task.swift */,
+				74B12D172A01FE25003953B1 /* TimeSelection.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				748DAE5529FD943C003A3B06 /* ViewModel.swift in Sources */,
 				742A7C8029FEE9260050C026 /* DragPreference.swift in Sources */,
 				748DAE4229FD930D003A3B06 /* SortView.swift in Sources */,
+				74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */,
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
 				748DAE4E29FD9371003A3B06 /* Task.swift in Sources */,
 				748DAE4029FD930D003A3B06 /* ADHDBrainApp.swift in Sources */,

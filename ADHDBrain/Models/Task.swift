@@ -7,23 +7,20 @@
 
 import Foundation
 
-enum SortedTime {
-    case Morning, Afternoon, Evening
-}
-
-enum SkippedTime {
-    case OneDay, ThreeDays, SevenDays
-}
-
 enum SortStatus: Equatable {
-    case sorted(SortedTime)
-    case skipped(SkippedTime)
+    case sorted(TimeSelection)
+    case skipped(TimeSelection)
     case unsorted
 }
-
 
 struct Task: Identifiable, Equatable {
     let id = UUID()
     let name: String
     var sortStatus: SortStatus = .unsorted
+    
+    mutating func sort(at time: TimeSelection) {
+        if [TimeSelection.morning, TimeSelection.afternoon, TimeSelection.evening].contains(time) {
+            self.sortStatus = .sorted(time)
+        }
+    }
 }
