@@ -10,16 +10,15 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var vm = ViewModel()
     var body: some View {
-        if vm.unsortedTasks > 0 {
-            SortView(vm: vm)
-//                .onPreferenceChange(DragPreference.self) { value in
-//                    guard let value = value else { return }
-////                    isDragging = value
-//                    print(value)
-//                }
-        } else {
-            AssignTimeView(vm: vm)
+        ZStack {
+            if vm.unsortedTasks > 0 {
+                SortView(vm: vm)
+            } else {
+                AssignTimeView(vm: vm)
+            }
         }
+        .transition(.slide)
+        .animation(.default, value: vm.tasks)
     }
 }
 

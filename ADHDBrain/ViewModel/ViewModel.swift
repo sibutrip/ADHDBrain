@@ -16,38 +16,14 @@ class ViewModel: ObservableObject {
     }
     
     public func sortTask(for dropTask: DropTask?) {
-        guard let dropTask = dropTask else {
+        guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
             return
         }
-        var task = dropTask.task
-        let dropAction = dropTask.timeSelection
-        //        switch dropAction {
-        //        case .morning:
-        //            tasks.removeAll {
-        //                task == $0
-        //            }
-        //            task.sortStatus = .sorted(.Morning)
-        //            tasks.append(task)
-        //        case .afternoon:
-        //            tasks.removeAll {
-        //                task == $0
-        //            }
-        //            task.sortStatus = .sorted(.Afternoon)
-        //            tasks.append(task)
-        //        case .evening:
-        //            tasks.removeAll {
-        //                task == $0
-        //            }
-        //            task.sortStatus = .sorted(.Evening)
-        //            tasks.append(task)
-        //        case .noneSelected:
-        //            return
-        //        case .skip1:
-        //            return
-        //        case .skip3:
-        //            return
-        //        case .skip7:
-        //            return
+        task.sort(at: time)
+        tasks = tasks.filter {
+            $0.id != task.id
+        }
+        tasks.append(task)
     }
     
     init() {
