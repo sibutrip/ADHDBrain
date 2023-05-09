@@ -13,17 +13,19 @@
 		742A7C7B29FECDE90050C026 /* DropPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7A29FECDE90050C026 /* DropPreference.swift */; };
 		742A7C7E29FEDDA00050C026 /* DayOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7D29FEDDA00050C026 /* DayOverlay.swift */; };
 		742A7C8029FEE9260050C026 /* DragPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7F29FEE9260050C026 /* DragPreference.swift */; };
+		748CE41D2A0A986700827A39 /* DirectoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748CE41C2A0A986700827A39 /* DirectoryService.swift */; };
 		748DAE4029FD930D003A3B06 /* ADHDBrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE3F29FD930D003A3B06 /* ADHDBrainApp.swift */; };
 		748DAE4229FD930D003A3B06 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4129FD930D003A3B06 /* SortView.swift */; };
 		748DAE4429FD930E003A3B06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748DAE4329FD930E003A3B06 /* Assets.xcassets */; };
 		748DAE4729FD930E003A3B06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748DAE4629FD930E003A3B06 /* Preview Assets.xcassets */; };
-		748DAE4E29FD9371003A3B06 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4D29FD9371003A3B06 /* Task.swift */; };
+		748DAE4E29FD9371003A3B06 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4D29FD9371003A3B06 /* TaskItem.swift */; };
 		748DAE5029FD9383003A3B06 /* TaskRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4F29FD9383003A3B06 /* TaskRow.swift */; };
 		748DAE5529FD943C003A3B06 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE5429FD943C003A3B06 /* ViewModel.swift */; };
 		74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D172A01FE25003953B1 /* TimeSelection.swift */; };
 		74B12D1A2A020123003953B1 /* SkipTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D192A020123003953B1 /* SkipTab.swift */; };
 		74B12D1D2A02015E003953B1 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D1C2A02015E003953B1 /* Time.swift */; };
 		74B12D1F2A02039B003953B1 /* SortTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D1E2A02039B003953B1 /* SortTab.swift */; };
+		74B12D212A02B6E0003953B1 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D202A02B6E0003953B1 /* EventService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,18 +35,21 @@
 		742A7C7A29FECDE90050C026 /* DropPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropPreference.swift; sourceTree = "<group>"; };
 		742A7C7D29FEDDA00050C026 /* DayOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayOverlay.swift; sourceTree = "<group>"; };
 		742A7C7F29FEE9260050C026 /* DragPreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragPreference.swift; sourceTree = "<group>"; };
+		748CE41C2A0A986700827A39 /* DirectoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryService.swift; sourceTree = "<group>"; };
 		748DAE3C29FD930D003A3B06 /* ADHDBrain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ADHDBrain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		748DAE3F29FD930D003A3B06 /* ADHDBrainApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHDBrainApp.swift; sourceTree = "<group>"; };
 		748DAE4129FD930D003A3B06 /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		748DAE4329FD930E003A3B06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		748DAE4629FD930E003A3B06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		748DAE4D29FD9371003A3B06 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		748DAE4D29FD9371003A3B06 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		748DAE4F29FD9383003A3B06 /* TaskRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRow.swift; sourceTree = "<group>"; };
 		748DAE5429FD943C003A3B06 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		74B12D172A01FE25003953B1 /* TimeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelection.swift; sourceTree = "<group>"; };
 		74B12D192A020123003953B1 /* SkipTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipTab.swift; sourceTree = "<group>"; };
 		74B12D1C2A02015E003953B1 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		74B12D1E2A02039B003953B1 /* SortTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTab.swift; sourceTree = "<group>"; };
+		74B12D202A02B6E0003953B1 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		74B12D222A02B8BF003953B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +71,15 @@
 			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
+		748CE41E2A0A988900827A39 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				74B12D202A02B6E0003953B1 /* EventService.swift */,
+				748CE41C2A0A986700827A39 /* DirectoryService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		748DAE3329FD930D003A3B06 = {
 			isa = PBXGroup;
 			children = (
@@ -85,7 +99,9 @@
 		748DAE3E29FD930D003A3B06 /* ADHDBrain */ = {
 			isa = PBXGroup;
 			children = (
+				74B12D222A02B8BF003953B1 /* Info.plist */,
 				748DAE3F29FD930D003A3B06 /* ADHDBrainApp.swift */,
+				748CE41E2A0A988900827A39 /* Services */,
 				748DAE5329FD939D003A3B06 /* Models */,
 				748DAE5129FD9389003A3B06 /* View */,
 				748DAE5229FD9394003A3B06 /* ViewModel */,
@@ -128,7 +144,7 @@
 		748DAE5329FD939D003A3B06 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				748DAE4D29FD9371003A3B06 /* Task.swift */,
+				748DAE4D29FD9371003A3B06 /* TaskItem.swift */,
 				74B12D172A01FE25003953B1 /* TimeSelection.swift */,
 			);
 			path = Models;
@@ -147,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7D29FEDDA00050C026 /* DayOverlay.swift */,
-				74B12D192A020123003953B1 /* SkipTab.swift */,
 				74B12D1E2A02039B003953B1 /* SortTab.swift */,
+				74B12D192A020123003953B1 /* SkipTab.swift */,
 				74B12D1C2A02015E003953B1 /* Time.swift */,
 			);
 			path = SortOverlays;
@@ -229,10 +245,12 @@
 				74B12D1D2A02015E003953B1 /* Time.swift in Sources */,
 				74B12D1F2A02039B003953B1 /* SortTab.swift in Sources */,
 				748DAE4229FD930D003A3B06 /* SortView.swift in Sources */,
+				74B12D212A02B6E0003953B1 /* EventService.swift in Sources */,
 				74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */,
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
 				74B12D1A2A020123003953B1 /* SkipTab.swift in Sources */,
-				748DAE4E29FD9371003A3B06 /* Task.swift in Sources */,
+				748CE41D2A0A986700827A39 /* DirectoryService.swift in Sources */,
+				748DAE4E29FD9371003A3B06 /* TaskItem.swift in Sources */,
 				748DAE4029FD930D003A3B06 /* ADHDBrainApp.swift in Sources */,
 				748DAE5029FD9383003A3B06 /* TaskRow.swift in Sources */,
 				742A7C7729FEC6D10050C026 /* AssignTimeView.swift in Sources */,
@@ -370,6 +388,8 @@
 				DEVELOPMENT_TEAM = 3UR85MK9RT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ADHDBrain/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Need permission to create calendar event for task";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -400,6 +420,8 @@
 				DEVELOPMENT_TEAM = 3UR85MK9RT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ADHDBrain/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Need permission to create calendar event for task";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

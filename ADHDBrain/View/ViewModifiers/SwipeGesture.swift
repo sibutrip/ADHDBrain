@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SwipeGesture: ViewModifier {
-    let task: Task
+    let task: TaskItem
     
     let geo: GeometryProxy
 
@@ -76,7 +76,7 @@ struct SwipeGesture: ViewModifier {
             .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState))
     }
     
-    init(_ geo: GeometryProxy, with task: Task) {
+    init(_ geo: GeometryProxy, with task: TaskItem) {
         self.task = task
         self.geo = geo
         top = geo.size.height / 3

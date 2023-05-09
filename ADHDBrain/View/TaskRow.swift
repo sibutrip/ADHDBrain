@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskRow: View {
-    let task: Task
+    let task: TaskItem
     let geo: GeometryProxy
     
     var body: some View {
@@ -22,7 +22,7 @@ struct TaskRow: View {
         .frame(maxHeight: geo.size.height / 10)
         .modifier(SwipeGesture(geo, with: task))
     }
-    init(_ task: Task, _ geo: GeometryProxy) {
+    init(_ task: TaskItem, _ geo: GeometryProxy) {
         self.task = task
         self.geo = geo
     }
@@ -31,7 +31,7 @@ struct TaskRow: View {
 struct TaskRow_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { geo in
-            TaskRow(Task(name: "woo"), geo)
+            TaskRow(TaskItem(name: "woo"), geo)
         }
     }
 }

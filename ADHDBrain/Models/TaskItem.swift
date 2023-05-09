@@ -13,15 +13,16 @@ enum SortStatus: Equatable {
     case unsorted
 }
 
-struct Task: Identifiable, Equatable {
+struct TaskItem: Identifiable, Equatable {
     let id = UUID()
     let name: String
     var sortStatus: SortStatus = .unsorted
+    var scheduledDate: Date?
     
     mutating func sort(at time: TimeSelection) {
-        if [TimeSelection.morning, TimeSelection.afternoon, TimeSelection.evening].contains(time) {
+        if [TimeSelection.morning,TimeSelection.afternoon,TimeSelection.evening].contains([time]) {
             self.sortStatus = .sorted(time)
-        } else if [TimeSelection.skip1, TimeSelection.skip3, TimeSelection.skip7].contains(time) {
+        } else if [TimeSelection.skip1,TimeSelection.skip3,TimeSelection.skip7].contains([time]) {
             self.sortStatus = .skipped(time)
         }
     }

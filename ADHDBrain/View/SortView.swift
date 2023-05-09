@@ -66,7 +66,7 @@ struct SortView: View {
             focusedField = .none
             return
         }
-        vm.tasks.append(Task(name: newTask))
+        vm.tasks.append(TaskItem(name: newTask))
         newTask.removeAll()
         focusedField = .newTask
     }

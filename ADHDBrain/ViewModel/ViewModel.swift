@@ -6,9 +6,16 @@
 //
 
 import Foundation
+import EventKit
 
+enum GameState {
+    case ingame, inmenu
+}
+@MainActor
 class ViewModel: ObservableObject {
-    @Published var tasks: [Task]
+    let eventManager: EventService
+    @Published var gameState: GameState = .ingame
+    @Published var tasks: [TaskItem]
     var unsortedTasks: Int {
         tasks.filter {
             $0.sortStatus == .unsorted
@@ -24,6 +31,9 @@ class ViewModel: ObservableObject {
             $0.id != task.id
         }
         tasks.append(task)
+        Task {
+            await eventManager.scheduleEvent(for: task)
+        }
     }
     
     init() {
@@ -31,5 +41,7 @@ class ViewModel: ObservableObject {
             .init(name: "grocery shopping"),
             .init(name: "do performance review")
         ]
+        eventManager = EventService()
+        
     }
 }

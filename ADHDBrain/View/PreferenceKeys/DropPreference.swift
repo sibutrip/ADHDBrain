@@ -17,6 +17,6 @@ struct DropPreference: PreferenceKey {
 }
 
 struct DropTask: Equatable {
-    let task: Task
+    let task: TaskItem
     let timeSelection: TimeSelection
 }

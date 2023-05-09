@@ -10,3 +10,11 @@ import Foundation
 enum TimeSelection: Equatable {
     case morning, afternoon, evening, skip1, skip3, skip7, noneSelected
 }
+
+//enum TimeSelection: Equatable {
+//    case morning, afternoon, evening
+//}
+//
+//enum SkipSelection: Equatable {
+//    case skip1, skip3, skip7
+//}
