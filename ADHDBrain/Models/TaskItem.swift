@@ -18,6 +18,7 @@ struct TaskItem: Identifiable, Equatable, Codable {
     let name: String
     var sortStatus: SortStatus = .unsorted
     var skipUntilDate: Date?
+    var scheduledDate: Date?
     
     init(name: String) {
         id = UUID()
@@ -38,11 +39,14 @@ struct TaskItem: Identifiable, Equatable, Codable {
         }
     }
     
-    mutating func sort(at time: TimeSelection) {
+    mutating func sort(at time: TimeSelection) async {
         let midnight = DateComponents(calendar: Calendar.current, timeZone: .autoupdatingCurrent, year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: Calendar.current.component(.day, from: Date()), hour: 0, minute: 0, second: 0)
         switch time {
         case .morning, .afternoon, .evening:
+            let eventService = EventService()
             self.sortStatus = .sorted(time)
+            self.scheduledDate = eventService.selectDate(from: time)
+            await eventService.scheduleEvent(for: self)
         case .skip1:
             self.sortStatus = .skipped(time)
             self.skipUntilDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight.date!)!
@@ -57,7 +61,7 @@ struct TaskItem: Identifiable, Equatable, Codable {
         }
     }
     
-    mutating func checkSkipDate() {
+    mutating private func checkSkipDate() {
         guard let skipUntilDate = self.skipUntilDate else {
             return
         }

@@ -11,36 +11,25 @@ import EventKit
 class EventService {
     // to-do make used dates a property wrapper. also for task items. fo read/writing
     private var usedDates = [Date]()
-//    {
-//        didSet {
+    {
+        didSet {
 //            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
-//            DirectoryService.shared.writeModelToDisk(usedDates)
-//        }
-//    }
+            DirectoryService.shared.writeModelToDisk(usedDates)
+        }
+    }
     
     func scheduleEvent(for task: TaskItem) async  {
-        let timeSelection: TimeSelection
-        
-        switch task.sortStatus {
-        case .sorted(let taskTime):
-            timeSelection = taskTime
-        case .skipped(_):
-            return
-        case .unsorted:
-            return
-        }
-        
         let eventStore : EKEventStore = EKEventStore()
         do {
             if try await eventStore.requestAccess(to: .event) {
                 
-                let selectedDate = selectDate(from: timeSelection, excluding: usedDates)
+                guard let scheduledDate = task.scheduledDate else { return }
                 let event = EKEvent(eventStore: eventStore)
                 event.title = task.name
-                event.startDate = selectedDate
-                event.endDate = selectedDate.addingTimeInterval(900)
+                event.startDate = scheduledDate
+                event.endDate = scheduledDate.addingTimeInterval(900)
                 event.calendar = eventStore.defaultCalendarForNewEvents
-                event.addAlarm(.init(absoluteDate: selectedDate))
+                event.addAlarm(.init(absoluteDate: scheduledDate))
                 try eventStore.save(event, span: .thisEvent)
                 print(event.description)
             }
@@ -50,7 +39,8 @@ class EventService {
         print("Saved Event")
     }
     
-    private func selectDate(from timeSelection: TimeSelection, excluding usedDates: [Date]) -> Date {
+    public func selectDate(from timeSelection: TimeSelection) -> Date {
+        let usedDates = self.usedDates
         let availableDates = fetchAvailableDates(for: timeSelection)
         let randomDate = availableDates.filter { date in
             !usedDates.contains(date)
@@ -117,13 +107,21 @@ class EventService {
         return dates
     }
     
-    init() {
+    private func filterDates() {
         let usedDates: [Date]? = try? DirectoryService.shared.readModelFromDisk()
-        if let usedDates = usedDates {
+        if var usedDates = usedDates {
+            usedDates = usedDates.filter {
+                Date() < $0
+            }
             self.usedDates = usedDates
         } else {
             self.usedDates = []
         }
+    }
+    
+    init() {
+        filterDates()
+        
         print("used dates are", self.usedDates)
         let store = EKEventStore.init()
         store.requestAccess(to: .event) { (granted, error) in

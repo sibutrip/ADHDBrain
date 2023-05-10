@@ -10,7 +10,11 @@ import SwiftUI
 struct AllTasksView: View {
     @ObservedObject var vm: ViewModel
     var body: some View {
-        List(vm.tasks) { _ in
+        List(vm.tasks) { task in
+            VStack {
+                Text(task.name)
+//                Text(task.sortStatus)
+            }
         }
     }
 }

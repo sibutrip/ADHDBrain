@@ -22,17 +22,17 @@ class ViewModel: ObservableObject {
         guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
             return
         }
-        task.sort(at: time)
-        var tasks = self.tasks
-        tasks = tasks.filter {
-            $0.id != task.id
-        }
-        tasks.append(task)
-        self.tasks = tasks
         Task {
-            await eventService.scheduleEvent(for: task)
+            await task.sort(at: time)
+            var tasks = self.tasks
+            tasks = tasks.filter {
+                $0.id != task.id
+            }
+            tasks.append(task)
+            self.tasks = tasks
+//            await eventService.scheduleEvent(for: task)
+            DirectoryService.shared.writeModelToDisk(tasks)
         }
-        DirectoryService.shared.writeModelToDisk(tasks)
     }
     
     init() {
