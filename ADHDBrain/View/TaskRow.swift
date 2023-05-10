@@ -14,7 +14,7 @@ struct TaskRow: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(Color.blue).opacity(0.2)
+                .foregroundColor(Color.green).opacity(0.2)
             RoundedRectangle(cornerRadius: 10)
                 .stroke()
             Text(task.name)
