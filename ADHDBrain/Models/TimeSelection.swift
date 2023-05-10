@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TimeSelection: Equatable {
+enum TimeSelection: Equatable, Codable {
     case morning, afternoon, evening, skip1, skip3, skip7, noneSelected
 }
 

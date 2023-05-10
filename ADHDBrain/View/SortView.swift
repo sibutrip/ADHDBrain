@@ -20,44 +20,52 @@ struct SortView: View {
     
     var body: some View {
         GeometryReader { geo in
-            ZStack {
-                VStack {
-                    ForEach(vm.tasks) { task in
-                        if task.sortStatus == .unsorted {
-                            TaskRow(task, geo)
-                                .onPreferenceChange(DropPreference.self) {
-                                    dropTask in
-                                    vm.sortTask(for: dropTask)
+            
+                ZStack {
+                    VStack {
+                        if vm.unsortedTasks > 0 {
+                            ForEach(vm.tasks) { task in
+                                if task.sortStatus == .unsorted {
+                                    TaskRow(task, geo)
+                                        .onPreferenceChange(DropPreference.self) {
+                                            dropTask in
+                                            vm.sortTask(for: dropTask)
+                                        }
+                                        .onPreferenceChange(DragPreference.self) { dragAction in
+                                            if let dragAction = dragAction {
+                                                self.dragAction = dragAction
+                                            }
+                                        }
                                 }
-                                .onPreferenceChange(DragPreference.self) { dragAction in
-                                    if let dragAction = dragAction {
-                                        self.dragAction = dragAction
-                                    }
-                                }
-                        }
-                    }
-                    HStack {
-                        TextField("new task", text: $newTask)
-                            .textFieldStyle(.roundedBorder)
-                            .focused($focusedField, equals: .newTask)
-                            .onSubmit {
-                                addTask()
                             }
-                        Button {
-                            addTask()
-                        } label: {
-                            Image(systemName: "plus.circle")
-                                .foregroundColor(.green)
+                        } else {
+                            Text("you have no unsorted tasks!")
                         }
+                        HStack {
+                            TextField("new task", text: $newTask)
+                                .textFieldStyle(.roundedBorder)
+                                .focused($focusedField, equals: .newTask)
+                                .onSubmit {
+                                    addTask()
+                                }
+                            Button {
+                                addTask()
+                            } label: {
+                                Image(systemName: "plus.circle")
+                                    .foregroundColor(.green)
+                            }
+                        }
+                        .padding()
                     }
+                    .animation(.default, value: vm.tasks)
+                    .onAppear {
+                        focusedField = .none
+                    }
+                    DayOverlay(geo: geo, dragAction: $dragAction)
                 }
+                .transition(.slide)
                 .animation(.default, value: vm.tasks)
-                .onAppear {
-                    focusedField = .none
-                }
-                DayOverlay(geo: geo, dragAction: $dragAction)
-            }
-            .coordinateSpace(name: "SortView")
+                .coordinateSpace(name: "SortView")
         }
     }
     

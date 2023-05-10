@@ -11,19 +11,21 @@ import EventKit
 class EventService {
     // to-do make used dates a property wrapper. also for task items. fo read/writing
     private var usedDates = [Date]()
-    {
-        didSet {
-            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
-            DirectoryService.shared.writeModelToDisk(usedDates)
-        }
-    }
+//    {
+//        didSet {
+//            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
+//            DirectoryService.shared.writeModelToDisk(usedDates)
+//        }
+//    }
     
     func scheduleEvent(for task: TaskItem) async  {
         let timeSelection: TimeSelection
         
         switch task.sortStatus {
-        case .sorted(let taskTime), .skipped(let taskTime):
+        case .sorted(let taskTime):
             timeSelection = taskTime
+        case .skipped(_):
+            return
         case .unsorted:
             return
         }
@@ -40,12 +42,12 @@ class EventService {
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 event.addAlarm(.init(absoluteDate: selectedDate))
                 try eventStore.save(event, span: .thisEvent)
+                print(event.description)
             }
         } catch {
             print("failed to save event with error : \(error.localizedDescription)")
         }
         print("Saved Event")
-        
     }
     
     private func selectDate(from timeSelection: TimeSelection, excluding usedDates: [Date]) -> Date {
@@ -74,17 +76,16 @@ class EventService {
         }
         let hourDiff = (endHour - time.hour!) * 4
         let minDiff = (60 - time.minute!) / 15 // integer division
-        var availableSlots = hourDiff + minDiff // subtract 1 for 45 time end
+        var availableSlots = hourDiff + minDiff
         if availableSlots > 14 || availableSlots < 0 { // if the time hasnt come yet today (greater than 16), limit to 16. if it's already passed today (less than 0), set to 16
             availableSlots = 14
         }
-        //        print(availableSlots)
         let dates = generateDates(for: availableSlots, during: timeSelection)
         return dates
     }
     
     private func generateDates(for availableSlots: Int, during timeSelection: TimeSelection) -> [Date] {
-        let cal = Calendar(identifier: .gregorian)
+        let cal = Calendar.current
         var dates = [Date]()
         var availableSlots = availableSlots
         var mins = 45
@@ -117,8 +118,13 @@ class EventService {
     }
     
     init() {
-        self.usedDates = DirectoryService.shared.readModelFromDisk()
-        print("used dates are \(usedDates.description)")
+        let usedDates: [Date]? = try? DirectoryService.shared.readModelFromDisk()
+        if let usedDates = usedDates {
+            self.usedDates = usedDates
+        } else {
+            self.usedDates = []
+        }
+        print("used dates are", self.usedDates)
         let store = EKEventStore.init()
         store.requestAccess(to: .event) { (granted, error) in
             if let error = error {

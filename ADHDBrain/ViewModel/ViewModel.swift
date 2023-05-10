@@ -8,18 +8,14 @@
 import Foundation
 import EventKit
 
-enum GameState {
-    case ingame, inmenu
-}
 @MainActor
 class ViewModel: ObservableObject {
-    let eventManager: EventService
-    @Published var gameState: GameState = .ingame
+    let eventService: EventService
     @Published var tasks: [TaskItem]
     var unsortedTasks: Int {
-        tasks.filter {
-            $0.sortStatus == .unsorted
-        }.count
+        tasks
+            .filter { $0.sortStatus == .unsorted }
+            .count
     }
     
     public func sortTask(for dropTask: DropTask?) {
@@ -27,21 +23,26 @@ class ViewModel: ObservableObject {
             return
         }
         task.sort(at: time)
+        var tasks = self.tasks
         tasks = tasks.filter {
             $0.id != task.id
         }
         tasks.append(task)
+        self.tasks = tasks
         Task {
-            await eventManager.scheduleEvent(for: task)
+            await eventService.scheduleEvent(for: task)
         }
+        DirectoryService.shared.writeModelToDisk(tasks)
     }
     
     init() {
-        tasks = [
-            .init(name: "grocery shopping"),
-            .init(name: "do performance review")
-        ]
-        eventManager = EventService()
-        
+        eventService = EventService()
+        let tasks: [TaskItem]? = try? DirectoryService.shared.readModelFromDisk()
+        if let tasks = tasks {
+            self.tasks = tasks
+        } else {
+            self.tasks = []
+        }
+        print("tasks are", self.tasks)
     }
 }

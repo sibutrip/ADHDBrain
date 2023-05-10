@@ -10,12 +10,15 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var vm = ViewModel()
     var body: some View {
-        ZStack {
-            if vm.unsortedTasks > 0 {
-                SortView(vm: vm)
-            } else {
-                AssignTimeView(vm: vm)
-            }
+        TabView {
+            SortView(vm: vm)
+                .tabItem {
+                    Label("Sort", systemImage: "calendar")
+                }
+            AllTasksView(vm: vm)
+                .tabItem {
+                    Label("All", systemImage: "tray.full")
+                }
         }
         .transition(.slide)
         .animation(.default, value: vm.tasks)

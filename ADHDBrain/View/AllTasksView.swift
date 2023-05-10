@@ -7,17 +7,18 @@
 
 import SwiftUI
 
-struct AssignTimeView: View {
+struct AllTasksView: View {
     @ObservedObject var vm: ViewModel
     var body: some View {
-        Text("Hello, World!")
+        List(vm.tasks) { _ in
+        }
     }
 }
 
-struct AssignTimeView_Previews: PreviewProvider {
+struct AllTasksView_Previews: PreviewProvider {
     static var previews: some View {
-        AssignTimeView(vm: ViewModel())
-        AssignTimeView(vm: ViewModel())
+        AllTasksView(vm: ViewModel())
+        AllTasksView(vm: ViewModel())
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
         
     }
