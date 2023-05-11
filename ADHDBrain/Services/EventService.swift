@@ -13,7 +13,7 @@ class EventService {
     private var usedDates = [Date]()
     {
         didSet {
-//            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
+            //            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
             DirectoryService.shared.writeModelToDisk(usedDates)
         }
     }
@@ -31,7 +31,7 @@ class EventService {
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 event.addAlarm(.init(absoluteDate: scheduledDate))
                 try eventStore.save(event, span: .thisEvent)
-                print(event.description)
+//                print(event.description)
             }
         } catch {
             print("failed to save event with error : \(error.localizedDescription)")
@@ -39,12 +39,13 @@ class EventService {
         print("Saved Event")
     }
     
-    public func selectDate(from timeSelection: TimeSelection) -> Date {
+    public func selectDate(from timeSelection: TimeSelection) -> Date? {
         let usedDates = self.usedDates
         let availableDates = fetchAvailableDates(for: timeSelection)
         let randomDate = availableDates.filter { date in
             !usedDates.contains(date)
-        }.randomElement()!
+        }.randomElement()
+        guard let randomDate = randomDate else { return nil }
         self.usedDates.append(randomDate)
         return randomDate
     }
@@ -119,17 +120,23 @@ class EventService {
         }
     }
     
+    private func requestCalendarPermission() async -> Bool {
+        do {
+            let store = EKEventStore.init()
+            let result = try await store.requestAccess(to: .event)
+            return result
+        } catch {
+            return false
+        }
+    }
+    
     init() {
-        filterDates()
-        
-        print("used dates are", self.usedDates)
-        let store = EKEventStore.init()
-        store.requestAccess(to: .event) { (granted, error) in
-            if let error = error {
-                print("request access error: \(error)")
-            } else if granted {
-                print("granted!")
+        Task {
+            // TODO: reuqest this on first time when they're adding an event - appstorage
+            if await requestCalendarPermission() {
+                filterDates()
             } else {
+                usedDates = []
             }
         }
     }

@@ -12,8 +12,25 @@ struct SwipeGesture: ViewModifier {
     let task: TaskItem
     
     let geo: GeometryProxy
-
-    @State private var offset: CGSize = .zero
+    
+    //    @SortDragOffset private var offset: CGSize
+    
+    @StateObject var dragManager = DragManager()
+    
+    var offset: CGSize {
+        get {
+            var dragOffset = dragManager.offset
+            if DragManager.sortDidFail {
+                dragOffset = .zero
+                dragManager.zeroOffsets()
+            }
+            return dragOffset
+        }
+        nonmutating set {
+            dragManager.offset = newValue
+        }
+    }
+    
     @State private var dropPreference: DropPreference? // doess this need to be optional?
     @State private var dropState: TimeSelection = .noneSelected
     
@@ -74,6 +91,7 @@ struct SwipeGesture: ViewModifier {
             )
             .preference(key: DropPreference.self, value: DropTask(task: task, timeSelection: dropState))
             .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState))
+            .animation(.easeOut, value: isDragging)
     }
     
     init(_ geo: GeometryProxy, with task: TaskItem) {

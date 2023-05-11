@@ -27,6 +27,8 @@
 		74B12D1D2A02015E003953B1 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D1C2A02015E003953B1 /* Time.swift */; };
 		74B12D1F2A02039B003953B1 /* SortTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D1E2A02039B003953B1 /* SortTab.swift */; };
 		74B12D212A02B6E0003953B1 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D202A02B6E0003953B1 /* EventService.swift */; };
+		74C14DE52A0D1F7F000BD90B /* DragManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DE42A0D1F7F000BD90B /* DragManager.swift */; };
+		74C14DE72A0D8422000BD90B /* AllTasksRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,8 @@
 		74B12D1E2A02039B003953B1 /* SortTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTab.swift; sourceTree = "<group>"; };
 		74B12D202A02B6E0003953B1 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		74B12D222A02B8BF003953B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		74C14DE42A0D1F7F000BD90B /* DragManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragManager.swift; sourceTree = "<group>"; };
+		74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 				742A7C7429FEC5A10050C026 /* ContentView.swift */,
 				748DAE4129FD930D003A3B06 /* SortView.swift */,
 				742A7C7629FEC6D10050C026 /* AllTasksView.swift */,
+				74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */,
 				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
 				74B12D1B2A020149003953B1 /* SortOverlays */,
 				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
@@ -140,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				748DAE5429FD943C003A3B06 /* ViewModel.swift */,
+				74C14DE42A0D1F7F000BD90B /* DragManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -253,8 +259,10 @@
 				74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */,
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
 				74B12D1A2A020123003953B1 /* SkipTab.swift in Sources */,
+				74C14DE72A0D8422000BD90B /* AllTasksRowView.swift in Sources */,
 				748CE41D2A0A986700827A39 /* DirectoryService.swift in Sources */,
 				748DAE4E29FD9371003A3B06 /* TaskItem.swift in Sources */,
+				74C14DE52A0D1F7F000BD90B /* DragManager.swift in Sources */,
 				748DAE4029FD930D003A3B06 /* ADHDBrainApp.swift in Sources */,
 				748DAE5029FD9383003A3B06 /* TaskRow.swift in Sources */,
 				742A7C7729FEC6D10050C026 /* AllTasksView.swift in Sources */,

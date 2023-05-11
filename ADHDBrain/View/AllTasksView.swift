@@ -7,15 +7,14 @@
 
 import SwiftUI
 
+// delete swipe and unsort swipe
 struct AllTasksView: View {
     @ObservedObject var vm: ViewModel
     var body: some View {
         List(vm.tasks) { task in
-            VStack {
-                Text(task.name)
-//                Text(task.sortStatus)
-            }
+            AllTasksRowView(task, vm)
         }
+        //        .animation(.default, value: vm.tasks)
     }
 }
 

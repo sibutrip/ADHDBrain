@@ -18,21 +18,18 @@ class ViewModel: ObservableObject {
             .count
     }
     
-    public func sortTask(for dropTask: DropTask?) {
+    public func sortTask(for dropTask: DropTask?) async throws {
         guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
             return
         }
-        Task {
-            await task.sort(at: time)
-            var tasks = self.tasks
-            tasks = tasks.filter {
-                $0.id != task.id
-            }
-            tasks.append(task)
-            self.tasks = tasks
-//            await eventService.scheduleEvent(for: task)
-            DirectoryService.shared.writeModelToDisk(tasks)
+        try await task.sort(at: time)
+        var tasks = self.tasks
+        tasks = tasks.filter {
+            $0.id != task.id
         }
+        tasks.append(task)
+        self.tasks = tasks
+        DirectoryService.shared.writeModelToDisk(tasks)
     }
     
     init() {
@@ -43,6 +40,6 @@ class ViewModel: ObservableObject {
         } else {
             self.tasks = []
         }
-        print("tasks are", self.tasks)
+//        print("tasks are", self.tasks)
     }
 }
