@@ -131,9 +131,9 @@
 			children = (
 				742A7C7429FEC5A10050C026 /* ContentView.swift */,
 				748DAE4129FD930D003A3B06 /* SortView.swift */,
+				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
 				742A7C7629FEC6D10050C026 /* AllTasksView.swift */,
 				74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */,
-				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
 				74B12D1B2A020149003953B1 /* SortOverlays */,
 				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
 				74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */,

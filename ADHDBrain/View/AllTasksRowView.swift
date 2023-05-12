@@ -32,7 +32,7 @@ struct AllTasksRowView: View {
                 return Color.black
             }
         case .unsorted:
-            return Color.black
+            return Color.primary
         }
     }
     
@@ -48,6 +48,7 @@ struct AllTasksRowView: View {
             Button {
                 var task = task
                 task.sortStatus = .unsorted
+                task.scheduledDate = nil
                 vm.tasks = vm.tasks.map { existingTask in
                     if task.id == existingTask.id {
                         return task
