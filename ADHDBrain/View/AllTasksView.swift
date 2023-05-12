@@ -16,11 +16,14 @@ struct AllTasksView: View {
             if taskTimes[task.sortStatus.sortName] != nil {
                 taskTimes[task.sortStatus.sortName]!.append(task)
                 taskTimes[task.sortStatus.sortName] = taskTimes[task.sortStatus.sortName]?.sorted { first, second in
-                    if let firstDate = first.scheduledDate, let secondDate = second.scheduledDate {
-                        return firstDate < secondDate
+                    if first.sortStatus == .unsorted {
+                        return first.name < second.name
                     } else {
-                        return true
+                        if let firstDate = first.scheduledDate, let secondDate = second.scheduledDate {
+                            return firstDate < secondDate
+                        }
                     }
+                    return true
                 }
             } else {
                 taskTimes[task.sortStatus.sortName] = [task]
@@ -48,8 +51,6 @@ struct AllTasksView: View {
             } else if second.key == "Unsorted" {
                 return false
             }
-            print("Aaaa")
-
             return false
         }
     }
@@ -75,6 +76,7 @@ struct AllTasksView: View {
                         AllTasksRowView(task, vm)
                     }
                 }
+                .transition(.slide)
             }
         }
     }

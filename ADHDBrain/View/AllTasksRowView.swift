@@ -44,25 +44,10 @@ struct AllTasksRowView: View {
                 .font(.caption)
                 .foregroundColor(scheduleColor)
         }
-        .swipeActions(edge: .leading, allowsFullSwipe: true) {
-            Button {
-                var task = task
-                task.sortStatus = .unsorted
-                task.scheduledDate = nil
-                vm.tasks = vm.tasks.map { existingTask in
-                    if task.id == existingTask.id {
-                        return task
-                    } else {
-                        return existingTask
-                    }
-                }
-            } label: {
-                Label("Unsort", systemImage: "arrow.uturn.backward")
-            }
-            .tint(.yellow)
-        }
+        .modifier(Unsort($vm.tasks, task))
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button {
+#warning("remove from calendar")
                 vm.tasks = vm.tasks.filter {
                     $0.id != task.id
                 }
@@ -71,7 +56,7 @@ struct AllTasksRowView: View {
             }
             .tint(.red)
         }
-        
+        .animation(.default, value: vm.tasks)
     }
     init(_ task: TaskItem, _ vm: ViewModel) {
         self.task = task
