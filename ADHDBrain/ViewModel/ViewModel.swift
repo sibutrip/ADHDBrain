@@ -29,12 +29,12 @@ class ViewModel: ObservableObject {
         }
         tasks.append(task)
         self.tasks = tasks
-        DirectoryService.shared.writeModelToDisk(tasks)
+        DirectoryService.writeModelToDisk(tasks)
     }
     
     init() {
         eventService = EventService()
-        let tasks: [TaskItem]? = try? DirectoryService.shared.readModelFromDisk()
+        let tasks: [TaskItem]? = try? DirectoryService.readModelFromDisk()
         if let tasks = tasks {
             self.tasks = tasks
         } else {

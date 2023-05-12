@@ -14,7 +14,7 @@ class EventService {
     {
         didSet {
             //            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
-            DirectoryService.shared.writeModelToDisk(usedDates)
+            DirectoryService.writeModelToDisk(usedDates)
         }
     }
     
@@ -109,7 +109,7 @@ class EventService {
     }
     
     private func filterDates() {
-        let usedDates: [Date]? = try? DirectoryService.shared.readModelFromDisk()
+        let usedDates: [Date]? = try? DirectoryService.readModelFromDisk()
         if var usedDates = usedDates {
             usedDates = usedDates.filter {
                 Date() < $0

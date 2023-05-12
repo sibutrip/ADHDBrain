@@ -12,26 +12,30 @@ enum SortStatus: Equatable, Codable {
     case skipped(TimeSelection)
     case unsorted
     
-    //    var sortName: String {
-    //        switch self {
-    //        case .sorted(let timeSelection):
-    //            switch timeSelection {
-    //            case .morning, .afternoon, .evening:
-    //                return "scheduled at"
-    //            default:
-    //                return ""
-    //            }
-    //        case .skipped(let skipSelection):
-    //            switch skipSelection {
-    //            case .skip1, .skip3, .skip7:
-    //                return "skipped until"
-    //            default:
-    //                return ""
-    //            }
-    //        case .unsorted:
-    //            return "unsorted"
-    //        }
-    //    }
+    var sortName: String {
+        switch self {
+        case .sorted(let timeSelection):
+            switch timeSelection {
+            case .morning:
+                return "Morning"
+            case .afternoon:
+                return "Afternoon"
+            case .evening:
+                return "Evening"
+            default:
+                return ""
+            }
+        case .skipped(let skipSelection):
+            switch skipSelection {
+            case .skip1, .skip3, .skip7:
+                return "Skipped"
+            default:
+                return ""
+            }
+        case .unsorted:
+            return "Unsorted"
+        }
+    }
 }
 
 enum ScheduleError: Error {
@@ -42,14 +46,13 @@ struct TaskItem: Identifiable, Equatable, Codable {
     let id: UUID
     let name: String
     var sortStatus: SortStatus = .unsorted
-    var skipUntilDate: Date?
     var scheduledDate: Date?
     var scheduleDescription: String {
         switch sortStatus {
         case .sorted(_):
             return "scheduled at \(scheduledDate?.formatted() ?? "")"
         case .skipped(_):
-            return "skipped until \(skipUntilDate?.formatted() ?? "")"
+            return "skipped until \(scheduledDate?.formatted() ?? "")"
         case .unsorted:
             return "unsorted"
         }
@@ -64,17 +67,13 @@ struct TaskItem: Identifiable, Equatable, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(UUID.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
-        self.skipUntilDate = try container.decodeIfPresent(Date.self, forKey: .skipUntilDate)
         self.scheduledDate = try container.decodeIfPresent(Date.self, forKey: .scheduledDate)
-        if let skipUntilDate = skipUntilDate {
+        if let skipUntilDate = scheduledDate {
             if Date() > skipUntilDate {
                 self.sortStatus = .unsorted
             } else {
                 self.sortStatus = try container.decode(SortStatus.self, forKey: .sortStatus)
             }
-        }
-        if let scheduledDate = scheduledDate {
-            self.sortStatus = try container.decode(SortStatus.self, forKey: .sortStatus)
         }
     }
     
@@ -93,13 +92,13 @@ struct TaskItem: Identifiable, Equatable, Codable {
 #warning("uncomment this to save an event")
         case .skip1:
             self.sortStatus = .skipped(time)
-            self.skipUntilDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight.date!)!
+            self.scheduledDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight.date!)!
         case .skip3:
             self.sortStatus = .skipped(time)
-            self.skipUntilDate = Calendar.current.date(byAdding: .day, value: 3, to: midnight.date!)!
+            self.scheduledDate = Calendar.current.date(byAdding: .day, value: 3, to: midnight.date!)!
         case .skip7:
             self.sortStatus = .skipped(time)
-            self.skipUntilDate = Calendar.current.date(byAdding: .day, value: 7, to: midnight.date!)!
+            self.scheduledDate = Calendar.current.date(byAdding: .day, value: 7, to: midnight.date!)!
         case .noneSelected:
             return
         }
@@ -107,12 +106,12 @@ struct TaskItem: Identifiable, Equatable, Codable {
     }
     
     mutating private func checkSkipDate() {
-        guard let skipUntilDate = self.skipUntilDate else {
+        guard let skipUntilDate = self.scheduledDate else {
             return
         }
         if Date() > skipUntilDate {
             self.sortStatus = .unsorted
-            self.skipUntilDate = nil
+            self.scheduledDate = nil
         }
     }
 }
