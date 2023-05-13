@@ -11,10 +11,12 @@ import SwiftUI
 struct SortView: View {
     
     @StateObject var dragManager = DragManager()
-    #warning("swipe down to dismiss keyboard")
+#warning("swipe down to dismiss keyboard")
+#warning("drag preference dismiss keyboard")
 
+    
     enum FocusedField {
-        case newTask
+        case showKeyboard, dismissKeyboard
     }
     @State private var newTask = ""
     @ObservedObject var vm: ViewModel
@@ -25,68 +27,73 @@ struct SortView: View {
     
     var body: some View {
         GeometryReader { geo in
-            
-            ZStack {
-                VStack {
-                    if vm.unsortedTasks > 0 {
-                        ForEach(vm.tasks) { task in
-                            if task.sortStatus == .unsorted {
-                                TaskRow(task, geo)
-                                    .onPreferenceChange(DropPreference.self) {
-                                        dropTask in
-                                        Task {
-                                            do {
-                                                try await vm.sortTask(dropTask)
-                                            } catch {
-                                                print("sort is full")
-                                                DragManager.sortDidFail = true
-                                                sortDidFail = true
+            ScrollView {
+                ZStack {
+                    VStack {
+                        if vm.unsortedTasks > 0 {
+                            ForEach(vm.tasks) { task in
+                                if task.sortStatus == .unsorted {
+                                    TaskRow(task, geo)
+                                        .onPreferenceChange(DropPreference.self) {
+                                            dropTask in
+                                            Task {
+                                                do {
+                                                    try await vm.sortTask(dropTask)
+                                                } catch {
+                                                    print("sort is full")
+                                                    DragManager.sortDidFail = true
+                                                    sortDidFail = true
+                                                }
                                             }
                                         }
-                                    }
-                                    .onPreferenceChange(DragPreference.self) { dragAction in
-                                        if let dragAction = dragAction {
-                                            self.dragAction = dragAction
+                                        .onPreferenceChange(DragPreference.self) { dragAction in
+                                            if let dragAction = dragAction {
+                                                self.dragAction = dragAction
+                                            }
                                         }
-                                    }
+                                }
                             }
+                        } else {
+                            Text("you have no unsorted tasks!")
                         }
-                    } else {
-                        Text("you have no unsorted tasks!")
-                    }
-                    HStack {
-                        TextField("new task", text: $newTask)
-                            .textFieldStyle(.roundedBorder)
-                            .focused($focusedField, equals: .newTask)
-                            .onSubmit {
+                        HStack {
+                            TextField("new task", text: $newTask)
+                                .textFieldStyle(.roundedBorder)
+                                .focused($focusedField, equals: .showKeyboard)
+                                .onSubmit {
+                                    addTask()
+                                }
+                            Button {
                                 addTask()
+                            } label: {
+                                Image(systemName: "plus.circle")
+                                    .foregroundColor(.green)
                             }
-                        Button {
-                            addTask()
-                        } label: {
-                            Image(systemName: "plus.circle")
-                                .foregroundColor(.green)
                         }
+                        .padding()
                     }
-                    .padding()
+                    .animation(.default, value: vm.tasks)
+                    .onAppear {
+                        focusedField = .none
+                    }
+                    DayOverlay(geo: geo, dragAction: $dragAction)
+                    
                 }
+                .alert("Schedule is full", isPresented: $sortDidFail) {
+                    Button("ok") {
+                        sortDidFail = false
+                        DragManager.sortDidFail = false
+                    }
+                }
+                .transition(.slide)
                 .animation(.default, value: vm.tasks)
-                .onAppear {
-                    focusedField = .none
-                }
-                DayOverlay(geo: geo, dragAction: $dragAction)
-                
+                .coordinateSpace(name: "SortView")
+                .environmentObject(dragManager)
             }
-            .alert("Schedule is full", isPresented: $sortDidFail) {
-                Button("ok") {
-                    sortDidFail = false
-                    DragManager.sortDidFail = false
-                }
+            .onTapGesture {
+                print("aj")
+                focusedField = .none
             }
-            .transition(.slide)
-            .animation(.default, value: vm.tasks)
-            .coordinateSpace(name: "SortView")
-            .environmentObject(dragManager)
         }
     }
     
@@ -97,7 +104,7 @@ struct SortView: View {
         }
         vm.tasks.append(TaskItem(name: newTask))
         newTask.removeAll()
-        focusedField = .newTask
+        focusedField = .showKeyboard
     }
 }
 
