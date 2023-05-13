@@ -35,12 +35,15 @@ class EventService {
             throw DeleteFail.noDate
         }
         let predicate = eventStore.predicateForEvents(withStart: date, end: date.addingTimeInterval(900), calendars: [eventStore.defaultCalendarForNewEvents!])
-        let event = eventStore.events(matching: predicate)[0]
+        let events = eventStore.events(matching: predicate)
+        if events.count < 1 {
+            return
+        }
+        let event = events[0]
         try eventStore.remove(event, span: .thisEvent)
         self.usedDates = usedDates.filter {
             $0 != date
         }
-        print(event.description)
     }
     
     public func scheduleEvent(for task: TaskItem) async  {
