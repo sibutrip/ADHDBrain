@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct DropPreference: PreferenceKey {
-    static var defaultValue: DropTask?
+    static var defaultValue: (DropTask)?
 
     static func reduce(value: inout DropTask?, nextValue: () -> DropTask?) {
         value = nextValue()

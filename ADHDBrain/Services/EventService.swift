@@ -8,18 +8,43 @@
 import Foundation
 import EventKit
 
+enum DeleteFail: Error {
+    case noDate
+}
+
 class EventService {
     // to-do make used dates a property wrapper. also for task items. fo read/writing
     private var usedDates = [Date]()
     {
         didSet {
-            //            _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
+            print("\(usedDates.count) mumbef f events")
+                        _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
             DirectoryService.writeModelToDisk(usedDates)
         }
     }
     
-    func scheduleEvent(for task: TaskItem) async  {
-        let eventStore : EKEventStore = EKEventStore()
+    private let eventStore: EKEventStore
+    
+    
+    public func deleteEvent(for date: Date) throws {
+        let usedDates = self.usedDates
+        print(date.description(with: .autoupdatingCurrent))
+        let date = usedDates.first {
+            $0 == date
+        }
+        guard let date = date else {
+            throw DeleteFail.noDate
+        }
+        let predicate = eventStore.predicateForEvents(withStart: date, end: date.addingTimeInterval(900), calendars: [eventStore.defaultCalendarForNewEvents!])
+        let event = eventStore.events(matching: predicate)[0]
+        try eventStore.remove(event, span: .thisEvent)
+        self.usedDates = usedDates.filter {
+            $0 != date
+        }
+        print(event.description)
+    }
+    
+    public func scheduleEvent(for task: TaskItem) async  {
         do {
             if try await eventStore.requestAccess(to: .event) {
                 
@@ -31,8 +56,10 @@ class EventService {
                 event.calendar = eventStore.defaultCalendarForNewEvents
                 event.addAlarm(.init(absoluteDate: scheduledDate))
                 try eventStore.save(event, span: .thisEvent)
-//                print(event.description)
-            }
+                self.usedDates.append(scheduledDate)
+//                print(self.usedDates)
+                print(event.description)
+            } else { fatalError() }
         } catch {
             print("failed to save event with error : \(error.localizedDescription)")
         }
@@ -46,7 +73,6 @@ class EventService {
             !usedDates.contains(date)
         }.randomElement()
         guard let randomDate = randomDate else { return nil }
-        self.usedDates.append(randomDate)
         return randomDate
     }
     
@@ -131,8 +157,9 @@ class EventService {
     }
     
     init() {
+        self.eventStore = EKEventStore()
         Task {
-            // TODO: reuqest this on first time when they're adding an event - appstorage
+            // TODO: reuqest this on first time when they're adding an event - appstorage. prevent data race though
             if await requestCalendarPermission() {
                 filterDates()
             } else {
@@ -140,4 +167,6 @@ class EventService {
             }
         }
     }
+    
+    static let shared = EventService()
 }

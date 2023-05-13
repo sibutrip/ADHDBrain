@@ -11,10 +11,12 @@ import SwiftUI
 struct Unsort: ViewModifier {
     @Binding var tasks: [TaskItem]
     let task: TaskItem
+    @ObservedObject var vm: ViewModel
     
-    init(_ tasks: Binding<[TaskItem]>, _ task: TaskItem) {
+    init(_ tasks: Binding<[TaskItem]>, _ task: TaskItem, _ vm:ViewModel) {
         _tasks = tasks
         self.task = task
+        self.vm = vm
     }
     
     func body(content: Content) -> some View {
@@ -22,17 +24,17 @@ struct Unsort: ViewModifier {
             content
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
-                        var task = task
-                        task.sortStatus = .unsorted
-                        task.scheduledDate = nil
-#warning("remove from calendar")
-                        tasks = tasks.map { existingTask in
-                            if task.id == existingTask.id {
-                                return task
-                            } else {
-                                return existingTask
-                            }
-                        }
+                        vm.unscheduleTask(task)
+//                        var task = task
+//                        task.sortStatus = .unsorted
+//                        task.scheduledDate = nil
+//                        tasks = tasks.map { existingTask in
+//                            if task.id == existingTask.id {
+//                                return task
+//                            } else {
+//                                return existingTask
+//                            }
+//                        }
                     } label: {
                         Label("Unsort", systemImage: "arrow.uturn.backward")
                     }

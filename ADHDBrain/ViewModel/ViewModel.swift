@@ -10,6 +10,9 @@ import EventKit
 
 @MainActor
 class ViewModel: ObservableObject {
+    
+    
+    
     let eventService: EventService
     @Published var tasks: [TaskItem]
     var unsortedTasks: Int {
@@ -18,7 +21,7 @@ class ViewModel: ObservableObject {
             .count
     }
     
-    public func sortTask(for dropTask: DropTask?) async throws {
+    public func sortTask(_ dropTask: DropTask?) async throws {
         guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
             return
         }
@@ -32,14 +35,45 @@ class ViewModel: ObservableObject {
         DirectoryService.writeModelToDisk(tasks)
     }
     
+    public func unscheduleTask(_ task: TaskItem) {
+        do {
+            var task = task
+            var tasks = self.tasks
+            if let date = task.scheduledDate {
+                try eventService.deleteEvent(for: date)
+            }
+            tasks = tasks.filter {
+                $0.id != task.id
+            }
+            task.sortStatus = .unsorted
+            tasks.append(task)
+            DirectoryService.writeModelToDisk(tasks)
+            self.tasks = tasks
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    public func deleteTask(_ task: TaskItem) throws {
+        var tasks = self.tasks
+        if let date = task.scheduledDate {
+            try eventService.deleteEvent(for: date)
+        }
+        tasks = tasks.filter {
+            $0.id != task.id
+        }
+        DirectoryService.writeModelToDisk(tasks)
+        self.tasks = tasks
+    }
+    
     init() {
-        eventService = EventService()
+        eventService = EventService.shared
         let tasks: [TaskItem]? = try? DirectoryService.readModelFromDisk()
         if let tasks = tasks {
             self.tasks = tasks
         } else {
             self.tasks = []
         }
-//        print("tasks are", self.tasks)
+        //        print("tasks are", self.tasks)
     }
 }

@@ -81,15 +81,15 @@ struct TaskItem: Identifiable, Equatable, Codable {
         let midnight = DateComponents(calendar: Calendar.current, timeZone: .autoupdatingCurrent, year: Calendar.current.component(.year, from: Date()), month: Calendar.current.component(.month, from: Date()), day: Calendar.current.component(.day, from: Date()), hour: 0, minute: 0, second: 0)
         switch time {
         case .morning, .afternoon, .evening:
-            let eventService = EventService()
+            let eventService = EventService.shared
             let scheduledDate = eventService.selectDate(from: time)
             guard let scheduledDate = scheduledDate else {
                 throw ScheduleError.scheduleFull
             }
             self.scheduledDate = scheduledDate
             self.sortStatus = .sorted(time)
-            //            await eventService.scheduleEvent(for: self)
-#warning("uncomment this to save an event")
+            await eventService.scheduleEvent(for: self)
+//#warning("uncomment this to save an event")
         case .skip1:
             self.sortStatus = .skipped(time)
             self.scheduledDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight.date!)!

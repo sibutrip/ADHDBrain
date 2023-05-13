@@ -35,7 +35,7 @@ struct SortView: View {
                                         dropTask in
                                         Task {
                                             do {
-                                                try await vm.sortTask(for: dropTask)
+                                                try await vm.sortTask(dropTask)
                                             } catch {
                                                 print("sort is full")
                                                 DragManager.sortDidFail = true

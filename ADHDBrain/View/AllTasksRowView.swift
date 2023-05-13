@@ -11,6 +11,7 @@ import SwiftUI
 struct AllTasksRowView: View {
     let task: TaskItem
     @ObservedObject var vm: ViewModel
+    @State private var deleteDidFail = false
     
     var scheduleColor: Color {
         switch task.sortStatus {
@@ -44,17 +45,25 @@ struct AllTasksRowView: View {
                 .font(.caption)
                 .foregroundColor(scheduleColor)
         }
-        .modifier(Unsort($vm.tasks, task))
+        .modifier(Unsort($vm.tasks, task, vm))
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+            //TODO: make this a viewmodifier
             Button {
-#warning("remove from calendar")
-                vm.tasks = vm.tasks.filter {
-                    $0.id != task.id
+                do {
+                    try vm.deleteTask(task)
+                } catch {
+                    deleteDidFail = true
                 }
+//                vm.tasks = vm.tasks.filter {
+//                    $0.id != task.id
+//                }
             } label: {
                 Label("Delete", systemImage: "trash")
             }
             .tint(.red)
+        }
+        .alert("could not delete sorry", isPresented: $deleteDidFail) {
+            Button("ok") { deleteDidFail = false }
         }
         .animation(.default, value: vm.tasks)
     }
