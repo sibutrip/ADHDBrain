@@ -68,8 +68,8 @@ struct TaskItem: Identifiable, Equatable, Codable {
         self.id = try container.decode(UUID.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
         self.scheduledDate = try container.decodeIfPresent(Date.self, forKey: .scheduledDate)
-        if let skipUntilDate = scheduledDate {
-            if Date() > skipUntilDate {
+        if let scheduledDate = scheduledDate {
+            if Date() > scheduledDate {
                 self.sortStatus = .unsorted
             } else {
                 self.sortStatus = try container.decode(SortStatus.self, forKey: .sortStatus)
@@ -89,7 +89,6 @@ struct TaskItem: Identifiable, Equatable, Codable {
             self.scheduledDate = scheduledDate
             self.sortStatus = .sorted(time)
             await eventService.scheduleEvent(for: self)
-//#warning("uncomment this to save an event")
         case .skip1:
             self.sortStatus = .skipped(time)
             self.scheduledDate = Calendar.current.date(byAdding: .day, value: 1, to: midnight.date!)!

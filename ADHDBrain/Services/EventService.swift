@@ -17,8 +17,7 @@ class EventService {
     private var usedDates = [Date]()
     {
         didSet {
-            print("\(usedDates.count) mumbef f events")
-                        _ = usedDates.map {print($0.description(with: .autoupdatingCurrent)) }
+            _ = usedDates.map { print($0.description(with: .autoupdatingCurrent)) }
             DirectoryService.writeModelToDisk(usedDates)
         }
     }
@@ -57,7 +56,7 @@ class EventService {
                 event.addAlarm(.init(absoluteDate: scheduledDate))
                 try eventStore.save(event, span: .thisEvent)
                 self.usedDates.append(scheduledDate)
-//                print(self.usedDates)
+                //                print(self.usedDates)
                 print(event.description)
             } else { fatalError() }
         } catch {

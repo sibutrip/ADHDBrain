@@ -11,10 +11,12 @@ import EventKit
 @MainActor
 class ViewModel: ObservableObject {
     
-    
-    
     let eventService: EventService
-    @Published var tasks: [TaskItem]
+    @ReadWrite var tasks: [TaskItem] {
+        didSet {
+            objectWillChange.send()
+        }
+    }
     var unsortedTasks: Int {
         tasks
             .filter { $0.sortStatus == .unsorted }
@@ -70,7 +72,7 @@ class ViewModel: ObservableObject {
         eventService = EventService.shared
         let tasks: [TaskItem]? = try? DirectoryService.readModelFromDisk()
         if let tasks = tasks {
-            self.tasks = tasks
+            _tasks.projectedValue = tasks
         } else {
             self.tasks = []
         }
