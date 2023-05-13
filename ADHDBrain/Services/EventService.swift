@@ -16,7 +16,7 @@ class EventService {
     // to-do make used dates a property wrapper. also for task items. fo read/writing
     @Saving private var usedDates: [Date] {
         didSet {
-            usedDates.map {
+            _ = usedDates.map {
                 print($0.description(with: .autoupdatingCurrent))
             }
         }

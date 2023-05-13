@@ -23,8 +23,8 @@ struct SortTab: View {
     
     var body: some View {
         Circle()
-            .foregroundColor(.blue)
-            .opacity(isDragging ? 0.2 : 0.0)
+            .foregroundColor(Color.sort)
+            .opacity(isDragging ? 0.75 : 0.0)
             .frame(width: geo.size.width, alignment: .trailing)
             .offset(x: geo.size.height / 4)
             .overlay {

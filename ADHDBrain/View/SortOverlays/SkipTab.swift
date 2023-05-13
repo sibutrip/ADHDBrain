@@ -23,8 +23,8 @@ struct SkipTab: View {
     
     var body: some View {
         Circle()
-            .foregroundColor(.red)
-            .opacity(isDragging ? 0.2 : 0.0)
+            .foregroundColor(.skip)
+            .opacity(isDragging ? 0.75 : 0.0)
             .frame(width: geo.size.width, alignment: .leading)
             .offset(x: -geo.size.height / 4)
             .overlay {
