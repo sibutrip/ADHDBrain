@@ -38,23 +38,19 @@ class ViewModel: ObservableObject {
     }
     
     public func unscheduleTask(_ task: TaskItem) {
-        do {
-            var task = task
-            var tasks = self.tasks
-            if let date = task.scheduledDate {
-                try eventService.deleteEvent(for: date)
-            }
-            tasks = tasks.filter {
-                $0.id != task.id
-            }
-            task.scheduledDate = nil
-            task.sortStatus = .unsorted
-            tasks.append(task)
-            DirectoryService.writeModelToDisk(tasks)
-            self.tasks = tasks
-        } catch {
-            print(error.localizedDescription)
+        var task = task
+        var tasks = self.tasks
+        if let date = task.scheduledDate {
+            try? eventService.deleteEvent(for: date)
         }
+        tasks = tasks.filter {
+            $0.id != task.id
+        }
+        task.scheduledDate = nil
+        task.sortStatus = .unsorted
+        tasks.append(task)
+        DirectoryService.writeModelToDisk(tasks)
+        self.tasks = tasks
     }
     
     public func deleteTask(_ task: TaskItem) throws {
