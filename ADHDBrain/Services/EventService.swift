@@ -14,14 +14,13 @@ enum DeleteFail: Error {
 
 class EventService {
     // to-do make used dates a property wrapper. also for task items. fo read/writing
-    private var usedDates = [Date]()
-    {
+    @Saving private var usedDates: [Date] {
         didSet {
-            _ = usedDates.map { print($0.description(with: .autoupdatingCurrent)) }
-            DirectoryService.writeModelToDisk(usedDates)
+            usedDates.map {
+                print($0.description(with: .autoupdatingCurrent))
+            }
         }
     }
-    
     private let eventStore: EKEventStore
     
     
@@ -60,7 +59,6 @@ class EventService {
                 try eventStore.save(event, span: .thisEvent)
                 self.usedDates.append(scheduledDate)
                 //                print(self.usedDates)
-                print(event.description)
             } else { fatalError() }
         } catch {
             print("failed to save event with error : \(error.localizedDescription)")
@@ -136,7 +134,7 @@ class EventService {
         return dates
     }
     
-    private func filterDates() {
+    private func initUsedDates() {
         let usedDates: [Date]? = try? DirectoryService.readModelFromDisk()
         if var usedDates = usedDates {
             usedDates = usedDates.filter {
@@ -163,7 +161,7 @@ class EventService {
         Task {
             // TODO: reuqest this on first time when they're adding an event - appstorage. prevent data race though
             if await requestCalendarPermission() {
-                filterDates()
+                initUsedDates()
             } else {
                 usedDates = []
             }

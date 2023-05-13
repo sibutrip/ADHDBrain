@@ -30,7 +30,7 @@
 		74C14DE52A0D1F7F000BD90B /* DragManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DE42A0D1F7F000BD90B /* DragManager.swift */; };
 		74C14DE72A0D8422000BD90B /* AllTasksRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */; };
 		74C14DE92A0EA93E000BD90B /* Unsort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DE82A0EA93E000BD90B /* Unsort.swift */; };
-		74C14DF22A0F1562000BD90B /* ReadWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DF12A0F1562000BD90B /* ReadWrite.swift */; };
+		74C14DF22A0F1562000BD90B /* Saving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C14DF12A0F1562000BD90B /* Saving.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,7 @@
 		74C14DE42A0D1F7F000BD90B /* DragManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragManager.swift; sourceTree = "<group>"; };
 		74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksRowView.swift; sourceTree = "<group>"; };
 		74C14DE82A0EA93E000BD90B /* Unsort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unsort.swift; sourceTree = "<group>"; };
-		74C14DF12A0F1562000BD90B /* ReadWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWrite.swift; sourceTree = "<group>"; };
+		74C14DF12A0F1562000BD90B /* Saving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Saving.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,7 @@
 		74C14DF02A0F1548000BD90B /* PropertyWrapper */ = {
 			isa = PBXGroup;
 			children = (
-				74C14DF12A0F1562000BD90B /* ReadWrite.swift */,
+				74C14DF12A0F1562000BD90B /* Saving.swift */,
 			);
 			path = PropertyWrapper;
 			sourceTree = "<group>";
@@ -282,7 +282,7 @@
 				748DAE5029FD9383003A3B06 /* TaskRow.swift in Sources */,
 				742A7C7729FEC6D10050C026 /* AllTasksView.swift in Sources */,
 				742A7C7329FEC08E0050C026 /* SwipeGesture.swift in Sources */,
-				74C14DF22A0F1562000BD90B /* ReadWrite.swift in Sources */,
+				74C14DF22A0F1562000BD90B /* Saving.swift in Sources */,
 				742A7C7B29FECDE90050C026 /* DropPreference.swift in Sources */,
 				742A7C7E29FEDDA00050C026 /* DayOverlay.swift in Sources */,
 			);

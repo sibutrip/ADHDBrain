@@ -12,7 +12,7 @@ import EventKit
 class ViewModel: ObservableObject {
     
     let eventService: EventService
-    @ReadWrite var tasks: [TaskItem] {
+    @Saving var tasks: [TaskItem] {
         didSet {
             objectWillChange.send()
         }
@@ -47,6 +47,7 @@ class ViewModel: ObservableObject {
             tasks = tasks.filter {
                 $0.id != task.id
             }
+            task.scheduledDate = nil
             task.sortStatus = .unsorted
             tasks.append(task)
             DirectoryService.writeModelToDisk(tasks)
@@ -68,14 +69,17 @@ class ViewModel: ObservableObject {
         self.tasks = tasks
     }
     
-    init() {
-        eventService = EventService.shared
+    private func initTasks() {
         let tasks: [TaskItem]? = try? DirectoryService.readModelFromDisk()
         if let tasks = tasks {
             _tasks.projectedValue = tasks
         } else {
             self.tasks = []
         }
-        //        print("tasks are", self.tasks)
+    }
+    
+    init() {
+        eventService = EventService.shared
+        initTasks()
     }
 }

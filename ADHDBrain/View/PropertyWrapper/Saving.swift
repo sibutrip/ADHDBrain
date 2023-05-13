@@ -1,5 +1,5 @@
 //
-//  ReadWrite.swift
+//  Saving.swift
 //  ADHDBrain
 //
 //  Created by Cory Tripathy on 5/12/23.
@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @propertyWrapper
-struct ReadWrite<T:Codable>: DynamicProperty {
+struct Saving<T:Codable>: DynamicProperty {
     var projectedValue: [T] = []
     var wrappedValue: [T] {
         get {
