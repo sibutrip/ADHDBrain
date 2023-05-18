@@ -67,17 +67,22 @@ struct AllTasksView: View {
     }
     
     var body: some View {
-        if vm.tasks.isEmpty {
-            Text("You have no tasks!")
-        } else {
-            List(0..<sortedTaskTimes.count, id: \.self) { index in
-                Section(sortedTaskTimes[index].key) {
-                    ForEach(sortedTaskTimes[index].value) { task in
-                        AllTasksRowView(task, vm)
+        NavigationStack {
+            Group {
+                if vm.tasks.isEmpty {
+                    Text("You have no tasks!")
+                } else {
+                    List(0..<sortedTaskTimes.count, id: \.self) { index in
+                        Section(sortedTaskTimes[index].key) {
+                            ForEach(sortedTaskTimes[index].value) { task in
+                                AllTasksRowView(task, vm)
+                            }
+                        }
+                        .transition(.slide)
                     }
                 }
-                .transition(.slide)
             }
+            .navigationTitle("All Tasks")
         }
     }
 }

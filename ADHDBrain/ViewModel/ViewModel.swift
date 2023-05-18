@@ -40,6 +40,7 @@ class ViewModel: ObservableObject {
     public func unscheduleTask(_ task: TaskItem) {
         var task = task
         var tasks = self.tasks
+        // TODO: dont throw this error
         if let date = task.scheduledDate {
             try? eventService.deleteEvent(for: date)
         }
@@ -56,7 +57,7 @@ class ViewModel: ObservableObject {
     public func deleteTask(_ task: TaskItem) throws {
         var tasks = self.tasks
         if let date = task.scheduledDate {
-            try eventService.deleteEvent(for: date)
+            try? eventService.deleteEvent(for: date)
         }
         tasks = tasks.filter {
             $0.id != task.id

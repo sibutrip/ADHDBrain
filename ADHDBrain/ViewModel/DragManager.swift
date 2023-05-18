@@ -10,7 +10,19 @@ import Foundation
 class DragManager: ObservableObject {
     static var sortDidFail = false
     @Published var offset: CGSize = .zero
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     func zeroOffsets() {
         self._offset = .init(initialValue: .zero)
     }
+    
+    
 }

@@ -31,15 +31,20 @@ struct SwipeGesture: ViewModifier {
         }
     }
     
-    @State private var dropPreference: DropPreference? // doess this need to be optional?
+    @State private var dropPreference: DropPreference?
     @State private var dropState: TimeSelection = .noneSelected
     
     @State private var dragPreference = DragPreference()
     @State private var dragState: TimeSelection = .noneSelected
     @State private var isDragging: Bool = false
     
+    @State private var dismissKeyboardPreference: DismissKeyboardPreference?
+    @State private var dismissKeyboard: SortView.FocusedField? = .showKeyboard
+    
     @State var locationWidth: CGFloat = .zero
     @State var locationHeight: CGFloat = .zero
+    
+    lazy var dragGesture = DragGesture()
     
     let top: CGFloat
     let center: CGFloat
@@ -53,6 +58,7 @@ struct SwipeGesture: ViewModifier {
             .gesture(
                 DragGesture(coordinateSpace: .named("SortView"))
                     .onChanged { value in
+                        print(top)
                         isDragging = true
                         offset = value.translation
                         locationHeight = value.location.y
@@ -90,11 +96,14 @@ struct SwipeGesture: ViewModifier {
                     }
             )
             .preference(key: DropPreference.self, value: DropTask(task: task, timeSelection: dropState))
-            .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState))
+            .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState, keyboardSelection: dismissKeyboard))
+            .preference(key: DismissKeyboardPreference.self, value: dismissKeyboard)
+
             .animation(.easeOut, value: isDragging)
     }
     
     init(_ geo: GeometryProxy, with task: TaskItem) {
+        print("Ahh")
         self.task = task
         self.geo = geo
         top = geo.size.height / 3

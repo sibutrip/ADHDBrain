@@ -9,13 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var vm = ViewModel()
-//    @EnvironmentObject var DragManager
+    //    @EnvironmentObject var DragManager
     var body: some View {
         TabView {
             SortView(vm: vm)
                 .tabItem {
                     Label("Sort", systemImage: "calendar")
                 }
+                .navigationTitle("Sort Tasks")
             AllTasksView(vm: vm)
                 .tabItem {
                     Label("All", systemImage: "tray.full")

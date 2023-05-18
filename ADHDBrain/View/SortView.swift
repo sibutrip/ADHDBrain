@@ -13,7 +13,7 @@ struct SortView: View {
     @StateObject var dragManager = DragManager()
 #warning("swipe down to dismiss keyboard")
 #warning("drag preference dismiss keyboard")
-
+    
     
     enum FocusedField {
         case showKeyboard, dismissKeyboard
@@ -21,13 +21,15 @@ struct SortView: View {
     @State private var newTask = ""
     @ObservedObject var vm: ViewModel
     @FocusState private var focusedField: FocusedField?
+//    {didSet{print(focusedField.debugDescription)}}
     @State var dropAction: TimeSelection = .noneSelected
-    @State private var dragAction: DragTask = .init(isDragging: false, timeSelection: .noneSelected)
+    @State private var dragAction: DragTask = .init(isDragging: false, timeSelection: .noneSelected, keyboardSelection: .dismissKeyboard)
     @State private var sortDidFail: Bool = false
     
     var body: some View {
-        GeometryReader { geo in
-            ScrollView {
+        NavigationStack {
+            GeometryReader { geo in
+                //            ScrollView {
                 ZStack {
                     VStack {
                         if vm.unsortedTasks > 0 {
@@ -46,10 +48,16 @@ struct SortView: View {
                                                 }
                                             }
                                         }
+                                        .onPreferenceChange(DismissKeyboardPreference.self) { dismiss in
+                                            self.focusedField = nil
+                                        }
                                         .onPreferenceChange(DragPreference.self) { dragAction in
                                             if let dragAction = dragAction {
+                                                self.focusedField = nil
                                                 self.dragAction = dragAction
                                             }
+                                        }
+                                        .onPreferenceChange(DismissKeyboardPreference.self) { keyboardFocus in
                                         }
                                 }
                             }
@@ -89,17 +97,16 @@ struct SortView: View {
                 .animation(.default, value: vm.tasks)
                 .coordinateSpace(name: "SortView")
                 .environmentObject(dragManager)
+                
             }
-            .onTapGesture {
-                print("aj")
-                focusedField = .none
-            }
+            .navigationTitle("Sort Tasks")
         }
     }
     
     func addTask() {
         if newTask.isEmpty {
-            focusedField = .none
+            focusedField = .dismissKeyboard
+            print("dismessied")
             return
         }
         vm.tasks.append(TaskItem(name: newTask))

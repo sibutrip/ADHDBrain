@@ -19,7 +19,5 @@ struct DragPreference: PreferenceKey {
 struct DragTask: Equatable {
     let isDragging: Bool
     let timeSelection: TimeSelection
+    let keyboardSelection: SortView.FocusedField?
 }
-
-
-

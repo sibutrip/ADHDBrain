@@ -18,6 +18,7 @@ class EventService {
         didSet {
             _ = usedDates.map {
                 print($0.description(with: .autoupdatingCurrent))
+                print($0.formatted())
             }
         }
     }

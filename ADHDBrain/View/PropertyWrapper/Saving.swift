@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 @propertyWrapper
-struct Saving<T:Codable>: DynamicProperty {
+struct Saving<T:Encodable>: DynamicProperty {
     var projectedValue: [T] = []
     var wrappedValue: [T] {
         get {
