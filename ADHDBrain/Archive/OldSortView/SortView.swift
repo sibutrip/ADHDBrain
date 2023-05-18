@@ -11,9 +11,6 @@ import SwiftUI
 struct SortView: View {
     
     @StateObject var dragManager = DragManager()
-#warning("swipe down to dismiss keyboard")
-#warning("drag preference dismiss keyboard")
-    
     
     enum FocusedField {
         case showKeyboard, dismissKeyboard

@@ -29,17 +29,8 @@ struct SortListView: View {
                     .swipeActions(edge: .leading, allowsFullSwipe: false) {
                         Button {
                             // TODO: add functionality
-                        } label: {
-                            Label {
-                                Text("woo")
-                            } icon: {
-                                ZStack {
-                                    Text("uWu")
-                                    Text("ooh")
-                                }
-                            }
-
-//                            Label("Delete", systemImage: "1.circle")
+                        } label:{
+                            Label("Skip 1", image: "backward.1")
                         }
                         .tint(.red)
                     }
@@ -47,7 +38,7 @@ struct SortListView: View {
                         Button {
                             // TODO: add functionality
                         } label: {
-                            Label("Delete", systemImage: "3.circle")
+                            Label("Skip 3", image: "backward.3")
                         }
                         .tint(.red)
                     }
@@ -55,7 +46,7 @@ struct SortListView: View {
                         Button {
                             // TODO: add functionality
                         } label: {
-                            Label("Delete", systemImage: "gobackward")
+                            Label("Skip 7", image: "backward.7")
                         }
                         .tint(.red)
                     }

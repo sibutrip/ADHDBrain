@@ -11,8 +11,8 @@ import SwiftUI
 struct ADHDBrainApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
-            SortListView(vm: ViewModel())
+            ContentView()
+//            SortListView(vm: ViewModel())
         }
     }
 }

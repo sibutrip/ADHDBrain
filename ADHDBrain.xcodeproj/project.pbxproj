@@ -126,6 +126,7 @@
 				748DAE5229FD9394003A3B06 /* ViewModel */,
 				748DAE5129FD9389003A3B06 /* View */,
 				748DAE4329FD930E003A3B06 /* Assets.xcassets */,
+				749222F82A16BD4300ADCAA3 /* Archive */,
 				748DAE4529FD930E003A3B06 /* Preview Content */,
 			);
 			path = ADHDBrain;
@@ -143,15 +144,10 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7429FEC5A10050C026 /* ContentView.swift */,
-				748DAE4129FD930D003A3B06 /* SortView.swift */,
 				749222EC2A16AAC800ADCAA3 /* SortListView.swift */,
-				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
 				742A7C7629FEC6D10050C026 /* AllTasksView.swift */,
 				74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */,
 				74C14DF02A0F1548000BD90B /* PropertyWrapper */,
-				74B12D1B2A020149003953B1 /* SortOverlays */,
-				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
-				74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */,
 				74C14DF32A0F1E5A000BD90B /* Color+Extension.swift */,
 			);
 			path = View;
@@ -161,7 +157,6 @@
 			isa = PBXGroup;
 			children = (
 				748DAE5429FD943C003A3B06 /* ViewModel.swift */,
-				74C14DE42A0D1F7F000BD90B /* DragManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -174,6 +169,27 @@
 				74B12D172A01FE25003953B1 /* TimeSelection.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		749222F72A16BCD000ADCAA3 /* OldSortView */ = {
+			isa = PBXGroup;
+			children = (
+				74C14DE42A0D1F7F000BD90B /* DragManager.swift */,
+				748DAE4129FD930D003A3B06 /* SortView.swift */,
+				748DAE4F29FD9383003A3B06 /* TaskRow.swift */,
+				74B12D1B2A020149003953B1 /* SortOverlays */,
+				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
+				74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */,
+			);
+			path = OldSortView;
+			sourceTree = "<group>";
+		};
+		749222F82A16BD4300ADCAA3 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				749222F72A16BCD000ADCAA3 /* OldSortView */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */ = {
