@@ -58,6 +58,7 @@ struct SortView: View {
                                             }
                                         }
                                         .onPreferenceChange(DismissKeyboardPreference.self) { keyboardFocus in
+                                            focusedField = keyboardFocus
                                         }
                                 }
                             }

@@ -12,9 +12,7 @@ struct SwipeGesture: ViewModifier {
     let task: TaskItem
     
     let geo: GeometryProxy
-    
-    //    @SortDragOffset private var offset: CGSize
-    
+        
     @StateObject var dragManager = DragManager()
     
     var offset: CGSize {
@@ -44,8 +42,10 @@ struct SwipeGesture: ViewModifier {
     @State var locationWidth: CGFloat = .zero
     @State var locationHeight: CGFloat = .zero
     
-    func cancelKeyboardGesture() -> DragGesture {
-        return DragGesture()
+    func cancelKeyboardGesture() -> _ChangedGesture<DragGesture> {
+        DragGesture().onChanged { _ in
+            dismissKeyboard = nil
+        }
     }
     
     func dragGesture(top: CGFloat, center: CGFloat, bottom: CGFloat, leading: CGFloat, trailing: CGFloat) -> _EndedGesture<_ChangedGesture<DragGesture>> {
@@ -100,48 +100,7 @@ struct SwipeGesture: ViewModifier {
     func body(content: Content) -> some View {
         content
             .offset(offset)
-            .gesture(
-                dragGesture(top: top, center: center, bottom: bottom, leading: leading, trailing: trailing)
-                )
-//                DragGesture(coordinateSpace: .named("SortView"))
-//                    .onChanged { value in
-//                        print(top)
-//                        isDragging = true
-//                        offset = value.translation
-//                        locationHeight = value.location.y
-//                        locationWidth = value.location.x
-//                        if locationWidth <  leading {
-//                            // leading edge of screen
-//                            if locationHeight < top {
-//                                dragState = .skip1
-//                            } else if locationHeight < center {
-//                                dragState = .skip3
-//                            } else {
-//                                dragState = .skip7
-//                            }
-//                        } else if locationWidth < trailing {
-//                            // middle of screen
-//                            dragState = .noneSelected
-//                        } else {
-//                            // trailing edge of screen
-//                            if locationHeight < top {
-//                                dragState = .morning
-//                            } else if locationHeight < center {
-//                                dragState = .afternoon
-//                            } else {
-//                                dragState = .evening
-//                            }
-//                        }
-//                    }
-//                    .onEnded { value in
-//                        dropState = dragState
-//                        dragState = .noneSelected
-//                        isDragging = false
-//                        if dropState == .noneSelected {
-//                            offset = .zero
-//                        }
-//                    }
-//            )
+            .gesture(dragGesture(top: top, center: center, bottom: bottom, leading: leading, trailing: trailing))
             .preference(key: DropPreference.self, value: DropTask(task: task, timeSelection: dropState))
             .preference(key: DragPreference.self, value: DragTask(isDragging: isDragging, timeSelection: dragState, keyboardSelection: dismissKeyboard))
             .preference(key: DismissKeyboardPreference.self, value: dismissKeyboard)
