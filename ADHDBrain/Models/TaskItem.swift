@@ -83,3 +83,9 @@ struct TaskItem: Identifiable, Equatable, Codable {
         }
     }
 }
+
+extension TaskItem: Comparable {
+    static func < (lhs: TaskItem, rhs: TaskItem) -> Bool {
+        lhs.name < rhs.name
+    }
+}

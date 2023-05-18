@@ -25,16 +25,16 @@ struct Unsort: ViewModifier {
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
                         vm.unscheduleTask(task)
-//                        var task = task
-//                        task.sortStatus = .unsorted
-//                        task.scheduledDate = nil
-//                        tasks = tasks.map { existingTask in
-//                            if task.id == existingTask.id {
-//                                return task
-//                            } else {
-//                                return existingTask
-//                            }
-//                        }
+                        var task = task
+                        task.sortStatus = .unsorted
+                        task.scheduledDate = nil
+                        tasks = tasks.map { existingTask in
+                            if task.id == existingTask.id {
+                                return task
+                            } else {
+                                return existingTask
+                            }
+                        }
                     } label: {
                         Label("Unsort", systemImage: "arrow.uturn.backward")
                     }

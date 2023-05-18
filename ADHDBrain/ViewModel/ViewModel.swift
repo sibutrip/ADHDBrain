@@ -12,29 +12,35 @@ import EventKit
 class ViewModel: ObservableObject {
     
     let eventService: EventService
+    
+    @Published var sortFull = false
+    
     @Saving var tasks: [TaskItem] {
         didSet {
+//            self.tasks = self.tasks.sorted()
             objectWillChange.send()
         }
     }
-    var unsortedTasks: Int {
+    
+    var unsortedTasks: [TaskItem] {
         tasks
             .filter { $0.sortStatus == .unsorted }
-            .count
     }
     
-    public func sortTask(_ dropTask: DropTask?) async throws {
-        guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
-            return
+    public func sortTask(_ task: TaskItem, at time: TimeSelection) async {
+        do {
+            var task = task
+            try await task.sort(at: time)
+            var tasks = self.tasks
+            tasks = tasks.filter {
+                $0.id != task.id
+            }
+            tasks.append(task)
+            self.tasks = tasks
+            DirectoryService.writeModelToDisk(tasks)
+        } catch {
+            sortFull = true
         }
-        try await task.sort(at: time)
-        var tasks = self.tasks
-        tasks = tasks.filter {
-            $0.id != task.id
-        }
-        tasks.append(task)
-        self.tasks = tasks
-        DirectoryService.writeModelToDisk(tasks)
     }
     
     public func unscheduleTask(_ task: TaskItem) {
