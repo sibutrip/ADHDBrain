@@ -19,8 +19,10 @@ struct SortView: View {
     @State var dropAction: TimeSelection = .noneSelected
     @State private var sortDidFail: Bool = false
     @State var taskToAdd = ""
-    
     @Environment(\.editMode) var editMode
+//    var isEditing: Bool {
+//        editMode?.wrappedValue.
+//    }
     
     func createTask() {
         if taskToAdd.isEmpty { return }
@@ -35,17 +37,11 @@ struct SortView: View {
                     let task = vm.unsortedTasks[index]
                     HStack {
                         Text(task.name)
-                            .modifier(SortViewModifiers(task: task, vm: vm))
-                        if self.editMode?.wrappedValue != .inactive {
-                            Button {
-                                vm.tasks.remove(at: index)
-                            } label: {
-                                Image(systemName: "minus.circle.fill")
-                                    .foregroundColor(.red)
-                                    .font(.title3)
-                            }
-                        }
+                            .modifier(SortActions(task: task, vm: vm, index: index))
                     }
+                }
+                .onDelete { index in
+                    vm.tasks.remove(atOffsets: index)
                 }
                 HStack {
                     TextField("add a task...", text: $taskToAdd)
@@ -72,6 +68,7 @@ struct SortView: View {
                 }
             }
             .navigationTitle("Sort Tasks")
+            .environment(\.editMode, editMode)
         }
     }
     
