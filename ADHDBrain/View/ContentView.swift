@@ -12,7 +12,7 @@ struct ContentView: View {
     //    @EnvironmentObject var DragManager
     var body: some View {
         TabView {
-            SortListView(vm: vm)
+            SortView(vm: vm)
                 .tabItem {
                     Label("Sort", systemImage: "calendar")
                 }

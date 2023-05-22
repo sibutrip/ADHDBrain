@@ -16,8 +16,9 @@
 		748DAE4729FD930E003A3B06 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 748DAE4629FD930E003A3B06 /* Preview Assets.xcassets */; };
 		748DAE4E29FD9371003A3B06 /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE4D29FD9371003A3B06 /* TaskItem.swift */; };
 		748DAE5529FD943C003A3B06 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 748DAE5429FD943C003A3B06 /* ViewModel.swift */; };
-		749222ED2A16AAC800ADCAA3 /* SortListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749222EC2A16AAC800ADCAA3 /* SortListView.swift */; };
+		749222ED2A16AAC800ADCAA3 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749222EC2A16AAC800ADCAA3 /* SortView.swift */; };
 		749222FA2A16BF8700ADCAA3 /* Unsort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749222F92A16BF8700ADCAA3 /* Unsort.swift */; };
+		749222FE2A1B96C800ADCAA3 /* SortViewModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 749222FD2A1B96C800ADCAA3 /* SortViewModifiers.swift */; };
 		74A98EF42A14063D00CB5689 /* SortStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A98EF32A14063D00CB5689 /* SortStatus.swift */; };
 		74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D172A01FE25003953B1 /* TimeSelection.swift */; };
 		74B12D212A02B6E0003953B1 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74B12D202A02B6E0003953B1 /* EventService.swift */; };
@@ -37,8 +38,9 @@
 		748DAE4629FD930E003A3B06 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		748DAE4D29FD9371003A3B06 /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		748DAE5429FD943C003A3B06 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		749222EC2A16AAC800ADCAA3 /* SortListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortListView.swift; sourceTree = "<group>"; };
+		749222EC2A16AAC800ADCAA3 /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		749222F92A16BF8700ADCAA3 /* Unsort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unsort.swift; sourceTree = "<group>"; };
+		749222FD2A1B96C800ADCAA3 /* SortViewModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewModifiers.swift; sourceTree = "<group>"; };
 		74A98EF32A14063D00CB5689 /* SortStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortStatus.swift; sourceTree = "<group>"; };
 		74B12D172A01FE25003953B1 /* TimeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelection.swift; sourceTree = "<group>"; };
 		74B12D202A02B6E0003953B1 /* EventService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
@@ -112,9 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7429FEC5A10050C026 /* ContentView.swift */,
-				749222EC2A16AAC800ADCAA3 /* SortListView.swift */,
+				749222FC2A1B969200ADCAA3 /* SortView */,
 				749222FB2A16BF9100ADCAA3 /* AllTasksView */,
-				74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */,
 				74C14DF02A0F1548000BD90B /* PropertyWrapper */,
 				74C14DF32A0F1E5A000BD90B /* Color+Extension.swift */,
 			);
@@ -143,9 +144,19 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7629FEC6D10050C026 /* AllTasksView.swift */,
+				74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */,
 				749222F92A16BF8700ADCAA3 /* Unsort.swift */,
 			);
 			path = AllTasksView;
+			sourceTree = "<group>";
+		};
+		749222FC2A1B969200ADCAA3 /* SortView */ = {
+			isa = PBXGroup;
+			children = (
+				749222EC2A16AAC800ADCAA3 /* SortView.swift */,
+				749222FD2A1B96C800ADCAA3 /* SortViewModifiers.swift */,
+			);
+			path = SortView;
 			sourceTree = "<group>";
 		};
 		74C14DF02A0F1548000BD90B /* PropertyWrapper */ = {
@@ -233,13 +244,14 @@
 				749222FA2A16BF8700ADCAA3 /* Unsort.swift in Sources */,
 				74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */,
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
+				749222FE2A1B96C800ADCAA3 /* SortViewModifiers.swift in Sources */,
 				74C14DE72A0D8422000BD90B /* AllTasksRowView.swift in Sources */,
 				748CE41D2A0A986700827A39 /* DirectoryService.swift in Sources */,
 				748DAE4E29FD9371003A3B06 /* TaskItem.swift in Sources */,
 				748DAE4029FD930D003A3B06 /* ADHDBrainApp.swift in Sources */,
 				742A7C7729FEC6D10050C026 /* AllTasksView.swift in Sources */,
 				74C14DF22A0F1562000BD90B /* Saving.swift in Sources */,
-				749222ED2A16AAC800ADCAA3 /* SortListView.swift in Sources */,
+				749222ED2A16AAC800ADCAA3 /* SortView.swift in Sources */,
 				74C14DF42A0F1E5A000BD90B /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
