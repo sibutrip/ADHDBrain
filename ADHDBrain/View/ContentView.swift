@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var vm = ViewModel()
-    //    @EnvironmentObject var DragManager
     var body: some View {
         TabView {
             SortListView(vm: vm)

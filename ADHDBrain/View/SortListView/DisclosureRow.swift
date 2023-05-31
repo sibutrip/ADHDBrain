@@ -46,7 +46,6 @@ struct DisclosureRow: View {
         self.times = times
         self.task = task
         self.vm = vm
-        print(times)
         if times == Time.days {
             rowTitle = "Schedule"
         } else {

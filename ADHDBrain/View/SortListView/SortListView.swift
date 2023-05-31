@@ -17,7 +17,7 @@ struct SortListView: View {
     }
     @State private var newTask = ""
     @ObservedObject var vm: ViewModel
-    @FocusState private var focusedField: FocusedField?
+    @FocusState private var isFocused
     @State var dropAction: TimeSelection = .noneSelected
     @State private var dragAction: DragTask = .init(isDragging: false, timeSelection: .noneSelected, keyboardSelection: .dismissKeyboard)
     @State private var sortDidFail: Bool = false
@@ -35,6 +35,19 @@ struct SortListView: View {
                 .onDelete { index in
                     vm.tasks.remove(atOffsets: index)
                 }
+                HStack {
+                    TextField("new task", text: $newTask)
+                        .focused($isFocused)
+                        .onSubmit {
+                            addTask()
+                        }
+                    Button {
+                        addTask()
+                    } label: {
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.green)
+                    }
+                }
             }
             .navigationTitle("Sort Tasks")
         }
@@ -42,13 +55,12 @@ struct SortListView: View {
     
     func addTask() {
         if newTask.isEmpty {
-            focusedField = .dismissKeyboard
-            print("dismessied")
+            isFocused = false
             return
         }
         vm.tasks.append(TaskItem(name: newTask))
         newTask.removeAll()
-        focusedField = .showKeyboard
+        isFocused = true
     }
 }
 
