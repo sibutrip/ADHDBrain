@@ -17,16 +17,13 @@ class ViewModel: ObservableObject {
             objectWillChange.send()
         }
     }
-    var unsortedTasks: Int {
+    var unsortedTasks: [TaskItem] {
         tasks
             .filter { $0.sortStatus == .unsorted }
-            .count
+            .sorted { $0.name < $1.name }
     }
     
     public func sortTask(_ task: TaskItem, _ time: TimeSelection) async throws {
-//        guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
-//            return
-//        }
         var task = task
         try await task.sort(at: time)
         var tasks = self.tasks
@@ -70,7 +67,7 @@ class ViewModel: ObservableObject {
     private func initTasks() {
         let tasks: [TaskItem]? = try? DirectoryService.readModelFromDisk()
         if let tasks = tasks {
-            _tasks.projectedValue = tasks
+            _tasks.projectedValue = tasks.sorted { $0.name < $1.name }
         } else {
             self.tasks = []
         }

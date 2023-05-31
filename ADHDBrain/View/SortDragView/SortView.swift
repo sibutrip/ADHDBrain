@@ -29,7 +29,7 @@ struct SortView: View {
                 //            ScrollView {
                 ZStack {
                     VStack {
-                        if vm.unsortedTasks > 0 {
+                        if vm.unsortedTasks.count > 0 {
                             ForEach(vm.tasks) { task in
                                 if task.sortStatus == .unsorted {
                                     TaskRow(task, geo)

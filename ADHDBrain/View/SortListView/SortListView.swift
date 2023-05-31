@@ -28,8 +28,8 @@ struct SortListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(0..<vm.tasks.count, id: \.self) { index in
-                    let task = vm.tasks[index]
+                ForEach(0..<vm.unsortedTasks.count, id: \.self) { index in
+                    let task = vm.unsortedTasks[index]
                     SortListDisclosure(vm, task, $disclosureExpanded)
                 }
                 .onDelete { index in
@@ -45,11 +45,16 @@ struct SortListView: View {
                         addTask()
                     } label: {
                         Image(systemName: "plus.circle")
-                            .foregroundColor(.green)
+                            .foregroundColor(.accentColor)
                     }
                 }
             }
             .navigationTitle("Sort Tasks")
+            .overlay {
+                if vm.tasks.isEmpty {
+                    Text("You have no tasks!")
+                }
+            }
         }
     }
     

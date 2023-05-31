@@ -16,7 +16,7 @@ struct Time: Identifiable, Equatable {
     let color: Color
     
     static let days: [Time] = [
-        .init(name: "Morning", image: "sunrise", timeSelection: .morning, color: .yellow),
+        .init(name: "Morning", image: "sunrise", timeSelection: .morning, color: .orange),
         .init(name: "Afternoon", image: "sunset", timeSelection: .afternoon, color: .cyan),
         .init(name: "Evening", image: "moon", timeSelection: .evening, color: .indigo)
     ]
