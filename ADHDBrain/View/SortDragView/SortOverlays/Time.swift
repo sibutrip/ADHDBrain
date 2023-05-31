@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Time: Identifiable {
+struct Time: Identifiable, Equatable {
     let id = UUID()
     let name: String
     let image: String

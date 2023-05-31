@@ -29,7 +29,7 @@ struct SortListView: View {
         NavigationStack {
             List {
                 ForEach(vm.tasks) { task in
-                    SortListDisclosure(task, $disclosureExpanded)
+                    SortListDisclosure(vm, task, $disclosureExpanded)
                 }
             }
             .navigationTitle("Sort Tasks")

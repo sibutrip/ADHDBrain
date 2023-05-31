@@ -23,10 +23,11 @@ class ViewModel: ObservableObject {
             .count
     }
     
-    public func sortTask(_ dropTask: DropTask?) async throws {
-        guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
-            return
-        }
+    public func sortTask(_ task: TaskItem, _ time: TimeSelection) async throws {
+//        guard var task = dropTask?.task, let time = dropTask?.timeSelection else {
+//            return
+//        }
+        var task = task
         try await task.sort(at: time)
         var tasks = self.tasks
         tasks = tasks.filter {

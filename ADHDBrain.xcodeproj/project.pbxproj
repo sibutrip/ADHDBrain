@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		740630912A27981A00B44297 /* SortListDisclosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740630902A27981A00B44297 /* SortListDisclosure.swift */; };
+		740630932A279A3D00B44297 /* DisclosureRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740630922A279A3D00B44297 /* DisclosureRow.swift */; };
 		742A7C7329FEC08E0050C026 /* SwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7229FEC08E0050C026 /* SwipeGesture.swift */; };
 		742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7429FEC5A10050C026 /* ContentView.swift */; };
 		742A7C7729FEC6D10050C026 /* AllTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7629FEC6D10050C026 /* AllTasksView.swift */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		740630902A27981A00B44297 /* SortListDisclosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortListDisclosure.swift; sourceTree = "<group>"; };
+		740630922A279A3D00B44297 /* DisclosureRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisclosureRow.swift; sourceTree = "<group>"; };
 		742A7C7229FEC08E0050C026 /* SwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGesture.swift; sourceTree = "<group>"; };
 		742A7C7429FEC5A10050C026 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		742A7C7629FEC6D10050C026 /* AllTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksView.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				749222EC2A16AAC800ADCAA3 /* SortListView.swift */,
 				740630902A27981A00B44297 /* SortListDisclosure.swift */,
+				740630922A279A3D00B44297 /* DisclosureRow.swift */,
 			);
 			path = SortListView;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
 				74B12D1A2A020123003953B1 /* SkipTab.swift in Sources */,
 				74C14DE72A0D8422000BD90B /* AllTasksRowView.swift in Sources */,
+				740630932A279A3D00B44297 /* DisclosureRow.swift in Sources */,
 				748CE41D2A0A986700827A39 /* DirectoryService.swift in Sources */,
 				748DAE4E29FD9371003A3B06 /* TaskItem.swift in Sources */,
 				74C14DE52A0D1F7F000BD90B /* DragManager.swift in Sources */,
