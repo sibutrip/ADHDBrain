@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		740630912A27981A00B44297 /* SortListDisclosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 740630902A27981A00B44297 /* SortListDisclosure.swift */; };
 		742A7C7329FEC08E0050C026 /* SwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7229FEC08E0050C026 /* SwipeGesture.swift */; };
 		742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7429FEC5A10050C026 /* ContentView.swift */; };
 		742A7C7729FEC6D10050C026 /* AllTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742A7C7629FEC6D10050C026 /* AllTasksView.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		740630902A27981A00B44297 /* SortListDisclosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortListDisclosure.swift; sourceTree = "<group>"; };
 		742A7C7229FEC08E0050C026 /* SwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGesture.swift; sourceTree = "<group>"; };
 		742A7C7429FEC5A10050C026 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		742A7C7629FEC6D10050C026 /* AllTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksView.swift; sourceTree = "<group>"; };
@@ -81,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7406308F2A27980500B44297 /* SortListView */ = {
+			isa = PBXGroup;
+			children = (
+				749222EC2A16AAC800ADCAA3 /* SortListView.swift */,
+				740630902A27981A00B44297 /* SortListDisclosure.swift */,
+			);
+			path = SortListView;
+			sourceTree = "<group>";
+		};
 		742A7C7C29FEDBD60050C026 /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,7 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				742A7C7429FEC5A10050C026 /* ContentView.swift */,
-				749222EC2A16AAC800ADCAA3 /* SortListView.swift */,
+				749222F72A16BCD000ADCAA3 /* SortDragView */,
+				7406308F2A27980500B44297 /* SortListView */,
 				742A7C7629FEC6D10050C026 /* AllTasksView.swift */,
 				74C14DE62A0D8422000BD90B /* AllTasksRowView.swift */,
 				74C14DF02A0F1548000BD90B /* PropertyWrapper */,
@@ -171,7 +183,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		749222F72A16BCD000ADCAA3 /* OldSortView */ = {
+		749222F72A16BCD000ADCAA3 /* SortDragView */ = {
 			isa = PBXGroup;
 			children = (
 				74C14DE42A0D1F7F000BD90B /* DragManager.swift */,
@@ -181,13 +193,12 @@
 				742A7C7C29FEDBD60050C026 /* ViewModifiers */,
 				74A8E9BA2A00B04400B9D3ED /* PreferenceKeys */,
 			);
-			path = OldSortView;
+			path = SortDragView;
 			sourceTree = "<group>";
 		};
 		749222F82A16BD4300ADCAA3 /* Archive */ = {
 			isa = PBXGroup;
 			children = (
-				749222F72A16BCD000ADCAA3 /* OldSortView */,
 			);
 			path = Archive;
 			sourceTree = "<group>";
@@ -300,6 +311,7 @@
 				74C14DF62A0FF092000BD90B /* DismissKeyboardPreference.swift in Sources */,
 				748DAE4229FD930D003A3B06 /* SortView.swift in Sources */,
 				74A98EF42A14063D00CB5689 /* SortStatus.swift in Sources */,
+				740630912A27981A00B44297 /* SortListDisclosure.swift in Sources */,
 				74B12D212A02B6E0003953B1 /* EventService.swift in Sources */,
 				74B12D182A01FE25003953B1 /* TimeSelection.swift in Sources */,
 				742A7C7529FEC5A10050C026 /* ContentView.swift in Sources */,
