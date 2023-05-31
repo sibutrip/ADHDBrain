@@ -11,6 +11,8 @@ import SwiftUI
 struct DisclosureRow: View {
     let task: TaskItem
     @ObservedObject var vm: ViewModel
+    @Binding var taskExpanded: TaskItem?
+
     let times: [Time]
     let rowTitle: String
     var body: some View {
@@ -20,6 +22,7 @@ struct DisclosureRow: View {
                     Button {
                         Task {
                             try await vm.sortTask(task, skip.timeSelection)
+                            taskExpanded = nil
                         }
                     } label: {
                         if times == Time.days {
@@ -42,10 +45,11 @@ struct DisclosureRow: View {
         }
     }
     
-    init(for times: [Time], _ vm: ViewModel, _ task: TaskItem) {
+    init(for times: [Time], _ vm: ViewModel, _ task: TaskItem, _ taskExpanded: Binding<TaskItem?>) {
         self.times = times
         self.task = task
         self.vm = vm
+        _taskExpanded = taskExpanded
         if times == Time.days {
             rowTitle = "Schedule"
         } else {

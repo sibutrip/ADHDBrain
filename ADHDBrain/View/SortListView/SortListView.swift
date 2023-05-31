@@ -21,7 +21,7 @@ struct SortListView: View {
     @State var dropAction: TimeSelection = .noneSelected
     @State private var dragAction: DragTask = .init(isDragging: false, timeSelection: .noneSelected, keyboardSelection: .dismissKeyboard)
     @State private var sortDidFail: Bool = false
-    @State private var disclosureExpanded: Set<UUID> = []
+    @State private var taskExpanded: TaskItem?
     @State private var disclosure: Bool = false
     
     
@@ -30,7 +30,7 @@ struct SortListView: View {
             List {
                 ForEach(0..<vm.unsortedTasks.count, id: \.self) { index in
                     let task = vm.unsortedTasks[index]
-                    SortListDisclosure(vm, task, $disclosureExpanded)
+                    SortListDisclosure(vm, task, $taskExpanded)
                 }
                 .onDelete { index in
                     vm.tasks.remove(atOffsets: index)

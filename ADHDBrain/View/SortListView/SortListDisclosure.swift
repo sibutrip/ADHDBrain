@@ -11,29 +11,30 @@ import SwiftUI
 struct SortListDisclosure: View {
     @ObservedObject var vm: ViewModel
     let task: TaskItem
-    @Binding var disclosureExpanded: Set<UUID>
+    @Binding var taskExpanded: TaskItem?
     var body: some View {
         DisclosureGroup(task.name, isExpanded: Binding<Bool>(
             get: {
-                disclosureExpanded.contains(task.id)
+                taskExpanded == task
             },
             set: { isExpanding in
-                disclosureExpanded.removeAll()
                 if isExpanding {
-                    disclosureExpanded.insert(task.id)
+                    taskExpanded = task
+                } else {
+                    taskExpanded = nil
                 }
             }) ) {
                 HStack(alignment: .center) {
-                    DisclosureRow(for: Time.skips, vm, task)
+                    DisclosureRow(for: Time.skips, vm, task, $taskExpanded)
                     Spacer()
-                    DisclosureRow(for: Time.days, vm, task)
+                    DisclosureRow(for: Time.days, vm, task, $taskExpanded)
                 }
             }
     }
     
-    init(_ vm: ViewModel, _ task: TaskItem, _ disclosureExpanded: Binding<Set<UUID>>) {
+    init(_ vm: ViewModel, _ task: TaskItem, _ taskExpanded: Binding<TaskItem?>) {
         self.vm = vm
         self.task = task
-        _disclosureExpanded = disclosureExpanded
+        _taskExpanded = taskExpanded
     }
 }
