@@ -28,8 +28,12 @@ struct SortListView: View {
     var body: some View {
         NavigationStack {
             List {
-                ForEach(vm.tasks) { task in
+                ForEach(0..<vm.tasks.count, id: \.self) { index in
+                    let task = vm.tasks[index]
                     SortListDisclosure(vm, task, $disclosureExpanded)
+                }
+                .onDelete { index in
+                    vm.tasks.remove(atOffsets: index)
                 }
             }
             .navigationTitle("Sort Tasks")
