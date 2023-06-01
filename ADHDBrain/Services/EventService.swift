@@ -7,19 +7,20 @@
 
 import Foundation
 import EventKit
+import SwiftUI
 
 enum DeleteFail: Error {
     case noDate
 }
 
 class EventService {
-    // to-do make used dates a property wrapper. also for task items. fo read/writing
+    @AppStorage("firstTimeAddingEvent") var firstTimeAddingEvent = true
     @Saving private var usedDates: [Date] {
         didSet {
-//            _ = usedDates.map {
-//                print($0.description(with: .autoupdatingCurrent))
-//                print($0.formatted())
-//            }
+            _ = usedDates.map {
+                print($0.description(with: .autoupdatingCurrent))
+                print($0.formatted())
+            }
         }
     }
     private let eventStore: EKEventStore
@@ -47,6 +48,12 @@ class EventService {
     }
     
     public func scheduleEvent(for task: TaskItem) async  {
+        if firstTimeAddingEvent {
+            guard await requestCalendarPermission() else {
+                return
+            }
+            firstTimeAddingEvent = false
+        }
         do {
             if try await eventStore.requestAccess(to: .event) {
                 
@@ -158,13 +165,10 @@ class EventService {
     
     init() {
         self.eventStore = EKEventStore()
-        Task {
-            // TODO: reuqest this on first time when they're adding an event - appstorage. prevent data race though
-            if await requestCalendarPermission() {
-                initUsedDates()
-            } else {
-                usedDates = []
-            }
+        if !firstTimeAddingEvent {
+            initUsedDates()
+        } else {
+            usedDates = []
         }
     }
     
