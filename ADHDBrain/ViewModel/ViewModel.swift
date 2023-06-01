@@ -23,6 +23,8 @@ class ViewModel: ObservableObject {
             .sorted { $0.name < $1.name }
     }
     
+    @Published var sortDidFail = false
+    
     public func sortTask(_ task: TaskItem, _ time: TimeSelection) async throws {
         var task = task
         try await task.sort(at: time)
@@ -38,9 +40,10 @@ class ViewModel: ObservableObject {
     public func unscheduleTask(_ task: TaskItem) {
         var task = task
         var tasks = self.tasks
-        // TODO: dont throw this error
         if let date = task.scheduledDate {
-            try? eventService.deleteEvent(for: date)
+            if task.sortStatus.sortName != "Skipped"  {
+                try? eventService.deleteEvent(for: date)
+            }
         }
         tasks = tasks.filter {
             $0.id != task.id

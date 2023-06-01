@@ -21,8 +21,12 @@ struct DisclosureRow: View {
                 ForEach(times) { skip in
                     Button {
                         Task {
-                            try await vm.sortTask(task, skip.timeSelection)
-                            taskExpanded = nil
+                            do {
+                                try await vm.sortTask(task, skip.timeSelection)
+                                taskExpanded = nil
+                            } catch {
+                                vm.sortDidFail = true
+                            }
                         }
                     } label: {
                         if times == Time.days {

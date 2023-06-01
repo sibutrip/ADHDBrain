@@ -16,10 +16,10 @@ class EventService {
     // to-do make used dates a property wrapper. also for task items. fo read/writing
     @Saving private var usedDates: [Date] {
         didSet {
-            _ = usedDates.map {
-                print($0.description(with: .autoupdatingCurrent))
-                print($0.formatted())
-            }
+//            _ = usedDates.map {
+//                print($0.description(with: .autoupdatingCurrent))
+//                print($0.formatted())
+//            }
         }
     }
     private let eventStore: EKEventStore
@@ -64,7 +64,6 @@ class EventService {
         } catch {
             print("failed to save event with error : \(error.localizedDescription)")
         }
-        print("Saved Event")
     }
     
     public func selectDate(from timeSelection: TimeSelection) -> Date? {

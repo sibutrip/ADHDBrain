@@ -55,6 +55,9 @@ struct SortListView: View {
                     Text("You have no tasks!")
                 }
             }
+            .alert("Schedule is full", isPresented: $vm.sortDidFail) {
+                Button("ok") { vm.sortDidFail = false }
+            }
         }
     }
     
