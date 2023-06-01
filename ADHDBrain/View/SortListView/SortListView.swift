@@ -10,7 +10,7 @@ import SwiftUI
 struct SortListView: View {
     
     @StateObject var dragManager = DragManager()
-    
+    @Environment(\.editMode) var editMode
     
     enum FocusedField {
         case showKeyboard, dismissKeyboard
@@ -36,8 +36,8 @@ struct SortListView: View {
                     vm.tasks.remove(atOffsets: index)
                 }
                 HStack {
-                    TextField("new task", text: $newTask)
-                        .focused($isFocused)
+                    TextField("New task...", text: $newTask)
+//                        .focused($isFocused)
                         .onSubmit {
                             addTask()
                         }
@@ -49,13 +49,18 @@ struct SortListView: View {
                     }
                 }
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    EditButton()
+                }
+            }
             .navigationTitle("Sort Tasks")
             .overlay {
                 if vm.tasks.isEmpty {
                     Text("You have no tasks!")
                 }
             }
-            .alert("Schedule is full", isPresented: $vm.sortDidFail) {
+            .alert("Your schedule at that time full. Try scheduling this event at a different time.", isPresented: $vm.sortDidFail) {
                 Button("ok") { vm.sortDidFail = false }
             }
         }
