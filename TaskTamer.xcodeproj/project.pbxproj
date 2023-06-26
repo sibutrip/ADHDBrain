@@ -103,13 +103,13 @@
 		74EFBD8D2A49C191002C8388 /* TaskTamer */ = {
 			isa = PBXGroup;
 			children = (
-				74EFBD8E2A49C191002C8388 /* ViewModel */,
 				74EFBD902A49C191002C8388 /* ADHDBrainApp.swift */,
-				74EFBD922A49C191002C8388 /* Assets.xcassets */,
 				74EFBD932A49C191002C8388 /* Models */,
-				74EFBD972A49C191002C8388 /* Preview Content */,
-				74EFBD992A49C191002C8388 /* View */,
 				74EFBDB52A49C191002C8388 /* Services */,
+				74EFBD8E2A49C191002C8388 /* ViewModel */,
+				74EFBD992A49C191002C8388 /* View */,
+				74EFBD922A49C191002C8388 /* Assets.xcassets */,
+				74EFBD972A49C191002C8388 /* Preview Content */,
 			);
 			path = TaskTamer;
 			sourceTree = "<group>";
@@ -143,13 +143,12 @@
 		74EFBD992A49C191002C8388 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				74EFBD9A2A49C191002C8388 /* SortListView */,
-				74EFBD9E2A49C191002C8388 /* SortDragView */,
-				74EFBDAE2A49C191002C8388 /* Color+Extension.swift */,
-				74EFBDAF2A49C191002C8388 /* AllTasksRowView.swift */,
-				74EFBDB02A49C191002C8388 /* AllTasksView.swift */,
-				74EFBDB12A49C191002C8388 /* PropertyWrapper */,
 				74EFBDB32A49C191002C8388 /* ContentView.swift */,
+				74EFBD9E2A49C191002C8388 /* SortDragView */,
+				74EFBD9A2A49C191002C8388 /* SortListView */,
+				74EFBDD82A49C2D6002C8388 /* AllTasks */,
+				74EFBDB12A49C191002C8388 /* PropertyWrapper */,
+				74EFBDAE2A49C191002C8388 /* Color+Extension.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -223,6 +222,15 @@
 				74EFBDB82A49C191002C8388 /* TaskService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		74EFBDD82A49C2D6002C8388 /* AllTasks */ = {
+			isa = PBXGroup;
+			children = (
+				74EFBDAF2A49C191002C8388 /* AllTasksRowView.swift */,
+				74EFBDB02A49C191002C8388 /* AllTasksView.swift */,
+			);
+			path = AllTasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
