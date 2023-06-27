@@ -32,8 +32,10 @@ struct SortListView: View {
                     let task = vm.unsortedTasks[index]
                     SortListDisclosure(vm, task, $taskExpanded)
                 }
-                .onDelete { index in
-                    vm.tasks.remove(atOffsets: index)
+                .onDelete { indexSet in
+                    guard let index = indexSet.first else { return }
+                    let task = vm.unsortedTasks[index]
+                    vm.tasks.removeAll { $0.id == task.id  }
                 }
                 HStack {
                     TextField("New task...", text: $newTask)

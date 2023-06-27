@@ -1,5 +1,5 @@
 //
-//  SortView.swift
+//  SortDragView.swift
 //  ADHDBrain
 //
 //  Created by Cory Tripathy on 4/29/23.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct SortView: View {
+struct SortDragView: View {
     
     @StateObject var dragManager = DragManager()
     
@@ -113,8 +113,8 @@ struct SortView: View {
     }
 }
 
-struct SortView_Previews: PreviewProvider {
+struct SortDragView_Previews: PreviewProvider {
     static var previews: some View {
-        SortView(vm: ViewModel())
+        SortDragView(vm: ViewModel())
     }
 }

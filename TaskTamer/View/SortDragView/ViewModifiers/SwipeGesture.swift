@@ -37,7 +37,7 @@ struct SwipeGesture: ViewModifier {
     @State private var isDragging: Bool = false
     
     @State private var dismissKeyboardPreference: DismissKeyboardPreference?
-    @State private var dismissKeyboard: SortView.FocusedField? = .showKeyboard
+    @State private var dismissKeyboard: SortDragView.FocusedField? = .showKeyboard
     
     @State var locationWidth: CGFloat = .zero
     @State var locationHeight: CGFloat = .zero

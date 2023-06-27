@@ -25,7 +25,7 @@
 		74EFBDC82A49C191002C8388 /* DragPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDA62A49C191002C8388 /* DragPreference.swift */; };
 		74EFBDC92A49C191002C8388 /* DismissKeyboardPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDA72A49C191002C8388 /* DismissKeyboardPreference.swift */; };
 		74EFBDCA2A49C191002C8388 /* DropPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDA82A49C191002C8388 /* DropPreference.swift */; };
-		74EFBDCB2A49C191002C8388 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDA92A49C191002C8388 /* SortView.swift */; };
+		74EFBDCB2A49C191002C8388 /* SortDragView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDA92A49C191002C8388 /* SortDragView.swift */; };
 		74EFBDCC2A49C191002C8388 /* DragManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDAA2A49C191002C8388 /* DragManager.swift */; };
 		74EFBDCD2A49C191002C8388 /* SwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDAC2A49C191002C8388 /* SwipeGesture.swift */; };
 		74EFBDCE2A49C191002C8388 /* Unsort.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBDAD2A49C191002C8388 /* Unsort.swift */; };
@@ -59,7 +59,7 @@
 		74EFBDA62A49C191002C8388 /* DragPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragPreference.swift; sourceTree = "<group>"; };
 		74EFBDA72A49C191002C8388 /* DismissKeyboardPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissKeyboardPreference.swift; sourceTree = "<group>"; };
 		74EFBDA82A49C191002C8388 /* DropPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropPreference.swift; sourceTree = "<group>"; };
-		74EFBDA92A49C191002C8388 /* SortView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
+		74EFBDA92A49C191002C8388 /* SortDragView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortDragView.swift; sourceTree = "<group>"; };
 		74EFBDAA2A49C191002C8388 /* DragManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DragManager.swift; sourceTree = "<group>"; };
 		74EFBDAC2A49C191002C8388 /* SwipeGesture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwipeGesture.swift; sourceTree = "<group>"; };
 		74EFBDAD2A49C191002C8388 /* Unsort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unsort.swift; sourceTree = "<group>"; };
@@ -156,8 +156,8 @@
 		74EFBD9A2A49C191002C8388 /* SortListView */ = {
 			isa = PBXGroup;
 			children = (
-				74EFBD9B2A49C191002C8388 /* DisclosureRow.swift */,
 				74EFBD9C2A49C191002C8388 /* SortListView.swift */,
+				74EFBD9B2A49C191002C8388 /* DisclosureRow.swift */,
 				74EFBD9D2A49C191002C8388 /* SortListDisclosure.swift */,
 			);
 			path = SortListView;
@@ -169,7 +169,7 @@
 				74EFBD9F2A49C191002C8388 /* TaskRow.swift */,
 				74EFBDA02A49C191002C8388 /* SortOverlays */,
 				74EFBDA52A49C191002C8388 /* PreferenceKeys */,
-				74EFBDA92A49C191002C8388 /* SortView.swift */,
+				74EFBDA92A49C191002C8388 /* SortDragView.swift */,
 				74EFBDAA2A49C191002C8388 /* DragManager.swift */,
 				74EFBDAB2A49C191002C8388 /* ViewModifiers */,
 			);
@@ -307,7 +307,7 @@
 				74EFBDD32A49C191002C8388 /* ContentView.swift in Sources */,
 				74EFBDCF2A49C191002C8388 /* Color+Extension.swift in Sources */,
 				74EFBDC42A49C191002C8388 /* SkipTab.swift in Sources */,
-				74EFBDCB2A49C191002C8388 /* SortView.swift in Sources */,
+				74EFBDCB2A49C191002C8388 /* SortDragView.swift in Sources */,
 				74EFBDCC2A49C191002C8388 /* DragManager.swift in Sources */,
 				74EFBDD62A49C191002C8388 /* DirectoryService.swift in Sources */,
 				74EFBDD12A49C191002C8388 /* AllTasksView.swift in Sources */,
@@ -470,7 +470,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -503,7 +503,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

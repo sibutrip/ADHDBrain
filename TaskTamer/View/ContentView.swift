@@ -11,7 +11,8 @@ struct ContentView: View {
     @StateObject var vm = ViewModel()
     var body: some View {
         TabView {
-            SortListView(vm: vm)
+//            SortListView(vm: vm)
+            SortDragView(vm: ViewModel())
                 .tabItem {
                     Label("Sort", systemImage: "calendar")
                 }

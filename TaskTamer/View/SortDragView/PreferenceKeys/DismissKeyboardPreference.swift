@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct DismissKeyboardPreference: PreferenceKey {
-    static var defaultValue: SortView.FocusedField?
+    static var defaultValue: SortDragView.FocusedField?
 
-    static func reduce(value: inout SortView.FocusedField?, nextValue: () -> SortView.FocusedField?) {
+    static func reduce(value: inout SortDragView.FocusedField?, nextValue: () -> SortDragView.FocusedField?) {
         value = nextValue()
     }
 }
