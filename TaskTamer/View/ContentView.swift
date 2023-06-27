@@ -11,12 +11,21 @@ struct ContentView: View {
     @StateObject var vm = ViewModel()
     var body: some View {
         TabView {
-//            SortListView(vm: vm)
-            SortDragView(vm: ViewModel())
-                .tabItem {
-                    Label("Sort", systemImage: "calendar")
-                }
-                .navigationTitle("Sort Tasks")
+            Group {
+                SortListView(vm: vm)
+                    .tabItem {
+                        Label("Disclosure", systemImage: "calendar")
+                    }
+                SortDragView(vm: vm)
+                    .tabItem {
+                        Label("Drag", systemImage: "calendar")
+                    }
+                SortSwipeView(vm: vm)
+                    .tabItem {
+                        Label("Swipe", systemImage: "calendar")
+                    }
+            }
+            .navigationTitle("Sort Tasks")
             AllTasksView(vm: vm)
                 .tabItem {
                     Label("All", systemImage: "tray.full")

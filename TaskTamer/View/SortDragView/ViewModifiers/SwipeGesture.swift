@@ -109,7 +109,6 @@ struct SwipeGesture: ViewModifier {
     }
     
     init(_ geo: GeometryProxy, with task: TaskItem) {
-        print("Ahh")
         self.task = task
         self.geo = geo
         top = geo.size.height / 3

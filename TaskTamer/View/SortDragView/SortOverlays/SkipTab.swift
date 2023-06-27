@@ -29,11 +29,11 @@ struct SkipTab: View {
             .offset(x: -geo.size.height / 4)
             .overlay {
                 HStack {
-                    Image(systemName: skip.image)
+                    Image(skip.image)
                         .resizable()
                         .scaledToFit()
                         .frame(width: geo.size.width / 10, alignment: .leading)
-                        .overlay { Text(skip.name) }
+//                        .overlay { Text(skip.name) }
                     Spacer()
                 }
                 .padding(.leading, 10)

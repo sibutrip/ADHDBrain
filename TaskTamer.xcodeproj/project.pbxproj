@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		745376B92A4B1FF2000382A0 /* SortSwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745376B82A4B1FF2000382A0 /* SortSwipeView.swift */; };
 		74EFBDB92A49C191002C8388 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBD8F2A49C191002C8388 /* ViewModel.swift */; };
 		74EFBDBA2A49C191002C8388 /* ADHDBrainApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74EFBD902A49C191002C8388 /* ADHDBrainApp.swift */; };
 		74EFBDBB2A49C191002C8388 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74EFBD922A49C191002C8388 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		745376B82A4B1FF2000382A0 /* SortSwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortSwipeView.swift; sourceTree = "<group>"; };
 		748DAE3C29FD930D003A3B06 /* TaskTamer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskTamer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74EFBD8F2A49C191002C8388 /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		74EFBD902A49C191002C8388 /* ADHDBrainApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ADHDBrainApp.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				74EFBDB32A49C191002C8388 /* ContentView.swift */,
+				745376B82A4B1FF2000382A0 /* SortSwipeView.swift */,
 				74EFBD9E2A49C191002C8388 /* SortDragView */,
 				74EFBD9A2A49C191002C8388 /* SortListView */,
 				74EFBDD82A49C2D6002C8388 /* AllTasks */,
@@ -166,10 +169,10 @@
 		74EFBD9E2A49C191002C8388 /* SortDragView */ = {
 			isa = PBXGroup;
 			children = (
+				74EFBDA92A49C191002C8388 /* SortDragView.swift */,
 				74EFBD9F2A49C191002C8388 /* TaskRow.swift */,
 				74EFBDA02A49C191002C8388 /* SortOverlays */,
 				74EFBDA52A49C191002C8388 /* PreferenceKeys */,
-				74EFBDA92A49C191002C8388 /* SortDragView.swift */,
 				74EFBDAA2A49C191002C8388 /* DragManager.swift */,
 				74EFBDAB2A49C191002C8388 /* ViewModifiers */,
 			);
@@ -325,6 +328,7 @@
 				74EFBDCE2A49C191002C8388 /* Unsort.swift in Sources */,
 				74EFBDC32A49C191002C8388 /* TaskRow.swift in Sources */,
 				74EFBDCD2A49C191002C8388 /* SwipeGesture.swift in Sources */,
+				745376B92A4B1FF2000382A0 /* SortSwipeView.swift in Sources */,
 				74EFBDBD2A49C191002C8388 /* TaskItem.swift in Sources */,
 				74EFBDC52A49C191002C8388 /* DayOverlay.swift in Sources */,
 				74EFBDD72A49C191002C8388 /* TaskService.swift in Sources */,
@@ -470,7 +474,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -503,7 +507,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
